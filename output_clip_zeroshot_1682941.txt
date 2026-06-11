@@ -1,0 +1,73 @@
+### Starting TaskPrologue of job 1682941 on tg093 at Thu Jun  4 11:48:23 PM CEST 2026
+Running on cores 64-95 with governor ondemand
+Thu Jun  4 23:48:23 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          On  |   00000000:81:00.0 Off |                    0 |
+| N/A   35C    P0             58W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+[23:48:25] >>> running fgvc  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP_fgvc.txt
+[23:49:19] <<< fgvc finished (rc=0)
+[23:49:19] >>> running caltech101  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP_caltech101.txt
+[23:49:55] <<< caltech101 finished (rc=0)
+[23:49:55] >>> running stanford_cars  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP_stanford_cars.txt
+[23:51:25] <<< stanford_cars finished (rc=0)
+[23:51:25] >>> running dtd  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP_dtd.txt
+[23:51:53] <<< dtd finished (rc=0)
+[23:51:53] >>> running eurosat  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP_eurosat.txt
+[23:53:22] <<< eurosat finished (rc=0)
+[23:53:22] >>> running oxford_flowers  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP_oxford_flowers.txt
+[23:54:03] <<< oxford_flowers finished (rc=0)
+[23:54:03] >>> running food101  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP_food101.txt
+[23:59:04] <<< food101 finished (rc=0)
+[23:59:04] >>> running oxford_pets  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP_oxford_pets.txt
+[23:59:51] <<< oxford_pets finished (rc=0)
+[23:59:51] >>> running ucf101  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP_ucf101.txt
+[00:00:44] <<< ucf101 finished (rc=0)
+[00:00:44] all datasets attempted. per-dataset CLIP results in: /home/hpc/rlvl/rlvl168v/MainRepo/results/
+=== JOB_STATISTICS ===
+=== current date     : Fri Jun  5 12:00:44 AM CEST 2026
+= Job-ID             : 1682941 on tinygpu
+= Job-Name           : clip_zeroshot
+= Job-Command        : /home/hpc/rlvl/rlvl168v/MainRepo/run_clip_zeroshot.sh
+= Initial workdir    : /home/hpc/rlvl/rlvl168v/MainRepo
+= Queue/Partition    : a100
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 08:00:00
+= Elapsed runtime    : 00:12:22
+= Total RAM usage    : 6.4 GiB of requested  GiB (%)   
+= Node list          : tg093
+= Subm/Elig/Start/End: 2026-06-04T23:48:21 / 2026-06-04T23:48:21 / 2026-06-04T23:48:22 / 2026-06-05T00:00:44
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+!!! /home/hpc             136.4G   104.9G   209.7G  -29095days     351K     500K   1,000K        N/A !!!
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]
+NVIDIA A100-SXM4-40GB, 00000000:81:00.0, 4169869, 21 %, 1 %, 894 MiB, 40336 ms
+NVIDIA A100-SXM4-40GB, 00000000:81:00.0, 4171092, 23 %, 2 %, 950 MiB, 29103 ms
+NVIDIA A100-SXM4-40GB, 00000000:81:00.0, 4172318, 25 %, 1 %, 894 MiB, 83831 ms
+NVIDIA A100-SXM4-40GB, 00000000:81:00.0, 4173547, 21 %, 1 %, 892 MiB, 20961 ms
+NVIDIA A100-SXM4-40GB, 00000000:81:00.0, 4174758, 25 %, 1 %, 892 MiB, 82800 ms
+NVIDIA A100-SXM4-40GB, 00000000:81:00.0, 4175974, 19 %, 1 %, 894 MiB, 34561 ms
+NVIDIA A100-SXM4-40GB, 00000000:81:00.0, 4177184, 26 %, 1 %, 894 MiB, 295131 ms
+NVIDIA A100-SXM4-40GB, 00000000:81:00.0, 4178488, 24 %, 1 %, 892 MiB, 39848 ms
+NVIDIA A100-SXM4-40GB, 00000000:81:00.0, 4179700, 22 %, 1 %, 974 MiB, 47184 ms

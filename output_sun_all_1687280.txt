@@ -1,0 +1,47 @@
+### Starting TaskPrologue of job 1687280 on tg085 at Fri Jun  5 08:25:35 PM CEST 2026
+Running on cores 10-11,26-27,42-43,58-59 with governor powersave
+Fri Jun  5 20:25:35 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 3080        On  |   00000000:B2:00.0 Off |                  N/A |
+| 30%   43C    P8             15W /  300W |       1MiB /  10240MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+[20:25:37] >>> CLIP_sun397.txt
+[2026-06-05T20:26:39.934] error: *** JOB 1687280 ON tg085 CANCELLED AT 2026-06-05T20:26:39 DUE to SIGNAL Terminated ***
+=== JOB_STATISTICS ===
+=== current date     : Fri Jun  5 08:26:42 PM CEST 2026
+= Job-ID             : 1687280 on tinygpu
+= Job-Name           : sun_all
+= Job-Command        : /home/hpc/rlvl/rlvl168v/MainRepo/run_sun_all.sh
+= Initial workdir    : /home/hpc/rlvl/rlvl168v/MainRepo
+= Queue/Partition    : rtx3080
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 12:00:00
+= Elapsed runtime    : 00:01:04
+= Total RAM usage    : 5.3 GiB of requested  GiB (%)   
+= Node list          : tg085
+= Subm/Elig/Start/End: 2026-06-05T20:25:34 / 2026-06-05T20:25:34 / 2026-06-05T20:25:35 / 2026-06-05T20:26:39
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+!!! /home/hpc             137.4G   104.9G   209.7G  -29094days     207K     500K   1,000K        N/A !!!
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]
+NVIDIA GeForce RTX 3080, 00000000:B2:00.0, 137281, 14 %, 2 %, 656 MiB, 49298 ms

@@ -1,0 +1,57 @@
+### Starting TaskPrologue of job 1682929 on tg060 at Thu Jun  4 11:37:30 PM CEST 2026
+Running on cores 2-3,10-11,18-19,26-27 with governor ondemand
+Thu Jun  4 23:37:30 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 2080 Ti     On  |   00000000:3B:00.0 Off |                  N/A |
+| 37%   50C    P8             10W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+# GFLOPs (CLIP ViT-B/16 visual encoder, per image)  host=tg060  Thu Jun  4 11:37:33 PM CEST 2026
+# Ours-0.0 = CLIP(R=1.0) | Ours-0.035 = TCA(R=0.9) | EViT-0.1/ToME-0.1 = EViT/ToME(R=0.9) | Ours-0.1 = TCA(R=0.7)
+ViT-B/16  Ours-0.0:  GFLOPs (visual encoder, per image) = 17.58
+ViT-B/16  Ours-0.035:  GFLOPs (visual encoder, per image) = 15.71
+ViT-B/16  EViT-0.1:  GFLOPs (visual encoder, per image) = 15.41
+ViT-B/16  ToME-0.1:  GFLOPs (visual encoder, per image) = 15.30
+ViT-B/16  Ours-0.1:  GFLOPs (visual encoder, per image) = 11.88
+=== JOB_STATISTICS ===
+=== current date     : Thu Jun  4 11:39:54 PM CEST 2026
+= Job-ID             : 1682929 on tinygpu
+= Job-Name           : tca_gflops
+= Job-Command        : /home/hpc/rlvl/rlvl168v/MainRepo/run_gflops.sh
+= Initial workdir    : /home/hpc/rlvl/rlvl168v/MainRepo
+= Queue/Partition    : work
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 00:10:00
+= Elapsed runtime    : 00:02:32
+= Total RAM usage    : 2.1 GiB of requested  GiB (%)   
+= Node list          : tg060
+= Subm/Elig/Start/End: 2026-06-04T23:21:59 / 2026-06-04T23:21:59 / 2026-06-04T23:37:22 / 2026-06-04T23:39:54
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+!!! /home/hpc             136.4G   104.9G   209.7G  -29095days     351K     500K   1,000K        N/A !!!
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]
+NVIDIA GeForce RTX 2080 Ti, 00000000:3B:00.0, 973295, 0 %, 0 %, 576 MiB, 17059 ms
+NVIDIA GeForce RTX 2080 Ti, 00000000:3B:00.0, 973523, 0 %, 0 %, 578 MiB, 6668 ms
+NVIDIA GeForce RTX 2080 Ti, 00000000:3B:00.0, 973545, 1 %, 0 %, 580 MiB, 5610 ms
+NVIDIA GeForce RTX 2080 Ti, 00000000:3B:00.0, 973640, 1 %, 0 %, 578 MiB, 5339 ms
+NVIDIA GeForce RTX 2080 Ti, 00000000:3B:00.0, 973714, 1 %, 0 %, 578 MiB, 5877 ms

@@ -1,0 +1,65 @@
+### Starting TaskPrologue of job 1687281 on tg091 at Fri Jun  5 08:26:30 PM CEST 2026
+Running on cores 96-127 with governor ondemand
+Fri Jun  5 20:26:30 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          On  |   00000000:C1:00.0 Off |                    0 |
+| N/A   36C    P0             52W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+[20:26:32] >>> CLIP_sun397.txt
+[20:30:18] <<< CLIP_sun397.txt done (rc=0)
+[20:30:18] >>> EViT_R0.9_sun397.txt
+[20:33:55] <<< EViT_R0.9_sun397.txt done (rc=0)
+[20:33:55] >>> ToME_R0.9_sun397.txt
+[20:37:53] <<< ToME_R0.9_sun397.txt done (rc=0)
+[20:37:53] >>> TCA_R0.9_sun397.txt
+[20:53:18] <<< TCA_R0.9_sun397.txt done (rc=0)
+[20:53:18] >>> TDA_sun397.txt
+[20:57:41] <<< TDA_sun397.txt done (rc=0)
+[20:57:41] >>> CLIPviaTDA_sun397.txt
+[21:01:10] <<< CLIPviaTDA_sun397.txt done (rc=0)
+[21:01:10] SUN397 all-methods done -> /home/hpc/rlvl/rlvl168v/MainRepo/results/*_sun397.txt
+Paper (SUN397):  CLIP 65.63 | TCA 65.92 | EViT 64.58 | ToME 64.22 | TDA 67.62
+=== JOB_STATISTICS ===
+=== current date     : Fri Jun  5 09:01:10 PM CEST 2026
+= Job-ID             : 1687281 on tinygpu
+= Job-Name           : sun_all
+= Job-Command        : /home/hpc/rlvl/rlvl168v/MainRepo/run_sun_all.sh
+= Initial workdir    : /home/hpc/rlvl/rlvl168v/MainRepo
+= Queue/Partition    : a100
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 12:00:00
+= Elapsed runtime    : 00:34:40
+= Total RAM usage    : 11.8 GiB of requested  GiB (%)   
+= Node list          : tg091
+= Subm/Elig/Start/End: 2026-06-05T20:26:29 / 2026-06-05T20:26:29 / 2026-06-05T20:26:30 / 2026-06-05T21:01:10
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+!!! /home/hpc             137.3G   104.9G   209.7G  -29094days     207K     500K   1,000K        N/A !!!
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]
+NVIDIA A100-SXM4-40GB, 00000000:C1:00.0, 3341069, 24 %, 1 %, 894 MiB, 215703 ms
+NVIDIA A100-SXM4-40GB, 00000000:C1:00.0, 3342356, 29 %, 1 %, 894 MiB, 209581 ms
+NVIDIA A100-SXM4-40GB, 00000000:C1:00.0, 3343623, 34 %, 1 %, 894 MiB, 231055 ms
+NVIDIA A100-SXM4-40GB, 00000000:C1:00.0, 3344904, 13 %, 0 %, 930 MiB, 918353 ms
+NVIDIA A100-SXM4-40GB, 00000000:C1:00.0, 3346614, 25 %, 1 %, 968 MiB, 257845 ms
+NVIDIA A100-SXM4-40GB, 00000000:C1:00.0, 3347363, 22 %, 1 %, 968 MiB, 202971 ms

@@ -1,0 +1,38 @@
+name: TTA
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.9
+  - pytorch=2.1.0
+  - torchvision=0.16.0
+  - pytorch-cuda=11.8
+  - pip
+  - pip:
+    - numpy
+    - scipy
+    - scikit-learn
+    - scikit-image
+    - Pillow
+    - tqdm
+    - einops
+    - fvcore
+    - timm
+    - gdown
+    - pyyaml
+    - easydict
+    - matplotlib
+    - opencv-python
+    - ftfy
+    - regex
+    - wandb
+    - thop
+    - imagecorruptions
+    - robustbench
+    - open-clip-torch
+    - transformers
+    - pandas
+    - seaborn
+    - yacs
+    - addict

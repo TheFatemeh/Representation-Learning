@@ -1,0 +1,15 @@
+nohup: ignoring input
+=== SUN397 ===
+--2026-06-05 18:54:43--  https://www.kaggle.com/api/v1/datasets/download/hiuphmnhtrung/sun397
+Resolving www.kaggle.com (www.kaggle.com)... 35.244.233.98
+Connecting to www.kaggle.com (www.kaggle.com)|35.244.233.98|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://storage.googleapis.com:443/kaggle-data-sets/8405602/13264357/bundle/archive.zip?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20260605%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260605T165444Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=c61dd5a754990126086e1d066a917562992789014526f91dadae5f1975872e5307a88758c86877d006b0dd25279c107a58eeaa9463f14bb9e721b9d658d45c80fbcffb0ff60fe4cab2149b1a62119e327c2b8fc1fe1ea3ffd3209fb61349aec9ac07ba843228c0cd7b740089f044df5839a26c39ebf045847ebd92634bc8d64c26bf5605526d3c553aa2b29c18f1870d9460dc91d361b621eca0fcb10abbe15dbb32f2eacbbcba9b3cf78ebf193957f1ac43d66391085528eecc19ec3dd4b24759f0b16bc96bd23a64f869271fed826766adbb54f2ceb7b583a1f6db361e90bbe259828c7f0526c86df9b1696978241831ede8aa46dc76066287543a042206e8 [following]
+--2026-06-05 18:54:44--  https://storage.googleapis.com/kaggle-data-sets/8405602/13264357/bundle/archive.zip?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20260605%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260605T165444Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=c61dd5a754990126086e1d066a917562992789014526f91dadae5f1975872e5307a88758c86877d006b0dd25279c107a58eeaa9463f14bb9e721b9d658d45c80fbcffb0ff60fe4cab2149b1a62119e327c2b8fc1fe1ea3ffd3209fb61349aec9ac07ba843228c0cd7b740089f044df5839a26c39ebf045847ebd92634bc8d64c26bf5605526d3c553aa2b29c18f1870d9460dc91d361b621eca0fcb10abbe15dbb32f2eacbbcba9b3cf78ebf193957f1ac43d66391085528eecc19ec3dd4b24759f0b16bc96bd23a64f869271fed826766adbb54f2ceb7b583a1f6db361e90bbe259828c7f0526c86df9b1696978241831ede8aa46dc76066287543a042206e8
+Resolving storage.googleapis.com (storage.googleapis.com)... 192.178.183.207, 142.251.13.207, 142.250.154.207, ...
+Connecting to storage.googleapis.com (storage.googleapis.com)|192.178.183.207|:443... connected.
+HTTP request sent, awaiting response... 416 Requested range not satisfiable
+
+    The file is already fully retrieved; nothing to do.
+
+  Done. Expected: /home/hpc/rlvl/rlvl168v/MainRepo/TCA/data/sun397/SUN397/

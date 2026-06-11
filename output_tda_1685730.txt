@@ -1,0 +1,73 @@
+### Starting TaskPrologue of job 1685730 on tg082 at Fri Jun  5 02:20:39 PM CEST 2026
+Running on cores 4-5,20-21,36-37,52-53 with governor powersave
+Fri Jun  5 14:20:39 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 3080        On  |   00000000:3D:00.0 Off |                  N/A |
+| 30%   36C    P8             20W /  300W |       1MiB /  10240MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+[14:20:40] >>> running caltech101  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/TDA_caltech101.txt
+[14:22:02] <<< caltech101 finished (rc=0)
+[14:22:02] >>> running dtd  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/TDA_dtd.txt
+[14:22:32] <<< dtd finished (rc=0)
+[14:22:32] >>> running eurosat  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/TDA_eurosat.txt
+[14:24:02] <<< eurosat finished (rc=0)
+[14:24:02] >>> running fgvc  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/TDA_fgvc.txt
+[14:24:52] <<< fgvc finished (rc=0)
+[14:24:52] >>> running food101  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/TDA_food101.txt
+[14:30:26] <<< food101 finished (rc=0)
+[14:30:26] >>> running oxford_flowers  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/TDA_oxford_flowers.txt
+[14:31:06] <<< oxford_flowers finished (rc=0)
+[14:31:06] >>> running oxford_pets  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/TDA_oxford_pets.txt
+[14:31:53] <<< oxford_pets finished (rc=0)
+[14:31:53] >>> running stanford_cars  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/TDA_stanford_cars.txt
+[14:34:46] <<< stanford_cars finished (rc=0)
+[14:34:46] >>> running ucf101  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/TDA_ucf101.txt
+[14:35:38] <<< ucf101 finished (rc=0)
+[14:35:38] done. TDA results in /home/hpc/rlvl/rlvl168v/MainRepo/results/ (Table 1: TDA avg 67.53).
+=== JOB_STATISTICS ===
+=== current date     : Fri Jun  5 02:35:38 PM CEST 2026
+= Job-ID             : 1685730 on tinygpu
+= Job-Name           : tda_repro
+= Job-Command        : /home/hpc/rlvl/rlvl168v/MainRepo/run_tda.sh
+= Initial workdir    : /home/hpc/rlvl/rlvl168v/MainRepo
+= Queue/Partition    : rtx3080
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 10:00:00
+= Elapsed runtime    : 00:15:00
+= Total RAM usage    : 7.3 GiB of requested  GiB (%)   
+= Node list          : tg082
+= Subm/Elig/Start/End: 2026-06-05T14:20:19 / 2026-06-05T14:20:19 / 2026-06-05T14:20:38 / 2026-06-05T14:35:38
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+!!! /home/hpc             137.2G   104.9G   209.7G  -29095days     352K     500K   1,000K        N/A !!!
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]
+NVIDIA GeForce RTX 3080, 00000000:3D:00.0, 365131, 17 %, 3 %, 656 MiB, 39906 ms
+NVIDIA GeForce RTX 3080, 00000000:3D:00.0, 365759, 19 %, 3 %, 656 MiB, 23364 ms
+NVIDIA GeForce RTX 3080, 00000000:3D:00.0, 366389, 24 %, 4 %, 654 MiB, 84656 ms
+NVIDIA GeForce RTX 3080, 00000000:3D:00.0, 367031, 20 %, 3 %, 656 MiB, 44146 ms
+NVIDIA GeForce RTX 3080, 00000000:3D:00.0, 367666, 25 %, 4 %, 656 MiB, 327991 ms
+NVIDIA GeForce RTX 3080, 00000000:3D:00.0, 368366, 20 %, 3 %, 656 MiB, 33054 ms
+NVIDIA GeForce RTX 3080, 00000000:3D:00.0, 368994, 23 %, 4 %, 656 MiB, 42240 ms
+NVIDIA GeForce RTX 3080, 00000000:3D:00.0, 369623, 14 %, 2 %, 656 MiB, 166656 ms
+NVIDIA GeForce RTX 3080, 00000000:3D:00.0, 370279, 22 %, 3 %, 656 MiB, 45789 ms

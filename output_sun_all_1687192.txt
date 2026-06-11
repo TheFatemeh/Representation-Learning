@@ -1,0 +1,65 @@
+### Starting TaskPrologue of job 1687192 on tg080 at Fri Jun  5 07:57:59 PM CEST 2026
+Running on cores 0-1,16-17,32-33,48-49 with governor powersave
+Fri Jun  5 19:57:59 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 3080        On  |   00000000:1A:00.0 Off |                  N/A |
+| 30%   35C    P8             17W /  300W |       1MiB /  10240MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+[19:58:01] >>> CLIP_sun397.txt
+[19:59:09] !!! CLIP_sun397.txt FAILED (rc=1)
+[19:59:09] >>> EViT_R0.9_sun397.txt
+[19:59:27] !!! EViT_R0.9_sun397.txt FAILED (rc=1)
+[19:59:27] >>> ToME_R0.9_sun397.txt
+[19:59:44] !!! ToME_R0.9_sun397.txt FAILED (rc=1)
+[19:59:44] >>> TCA_R0.9_sun397.txt
+[20:00:01] !!! TCA_R0.9_sun397.txt FAILED (rc=1)
+[20:00:01] >>> TDA_sun397.txt
+[20:00:24] !!! TDA_sun397.txt FAILED (rc=1)
+[20:00:24] >>> CLIPviaTDA_sun397.txt
+[20:00:40] !!! CLIPviaTDA_sun397.txt FAILED (rc=1)
+[20:00:40] SUN397 all-methods done -> /home/hpc/rlvl/rlvl168v/MainRepo/results/*_sun397.txt
+Paper (SUN397):  CLIP 65.63 | TCA 65.92 | EViT 64.58 | ToME 64.22 | TDA 67.62
+=== JOB_STATISTICS ===
+=== current date     : Fri Jun  5 08:00:40 PM CEST 2026
+= Job-ID             : 1687192 on tinygpu
+= Job-Name           : sun_all
+= Job-Command        : /home/hpc/rlvl/rlvl168v/MainRepo/run_sun_all.sh
+= Initial workdir    : /home/hpc/rlvl/rlvl168v/MainRepo
+= Queue/Partition    : rtx3080
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 12:00:00
+= Elapsed runtime    : 00:02:41
+= Total RAM usage    : 1.9 GiB of requested  GiB (%)   
+= Node list          : tg080
+= Subm/Elig/Start/End: 2026-06-05T19:57:58 / 2026-06-05T19:57:58 / 2026-06-05T19:57:59 / 2026-06-05T20:00:40
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+!!! /home/hpc             137.4G   104.9G   209.7G  -29094days     207K     500K   1,000K        N/A !!!
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]
+NVIDIA GeForce RTX 3080, 00000000:1A:00.0, 114246, 4 %, 0 %, 654 MiB, 14971 ms
+NVIDIA GeForce RTX 3080, 00000000:1A:00.0, 115495, 8 %, 0 %, 656 MiB, 9543 ms
+NVIDIA GeForce RTX 3080, 00000000:1A:00.0, 116625, 8 %, 0 %, 654 MiB, 9335 ms
+NVIDIA GeForce RTX 3080, 00000000:1A:00.0, 117756, 6 %, 0 %, 656 MiB, 10357 ms
+NVIDIA GeForce RTX 3080, 00000000:1A:00.0, 119011, 9 %, 1 %, 730 MiB, 12678 ms
+NVIDIA GeForce RTX 3080, 00000000:1A:00.0, 120066, 13 %, 2 %, 730 MiB, 8991 ms
