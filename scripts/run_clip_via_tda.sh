@@ -4,13 +4,13 @@
 #SBATCH --gres=gpu:1
 #SBATCH --partition=rtx3080
 #SBATCH --time=08:00:00
-#SBATCH --output=output_clip_via_tda_%j.txt
+#SBATCH --output=output/clip_via_tda_%j.txt
 #SBATCH --export=NONE
 
 # CLIP zero-shot THROUGH the official TDA repo: tda_runner.py with both caches disabled
 # (configs_clip/), so final_logits = clip_logits (pure CLIP, no adaptation). This is the decisive
 # check of whether TDA's own released code reproduces the paper's CLIP row. Data symlinked from
-# TCA/data. Per-dataset -> results/CLIPviaTDA_<ds>.txt. SUN397 omitted (not downloaded).
+# TCA/data. Per-dataset -> results/CLIPviaTDA_<ds>.txt. SUN397 now included (download it first).
 
 unset SLURM_EXPORT_ENV
 export WANDB_MODE=disabled
@@ -18,14 +18,16 @@ export WANDB_MODE=disabled
 module load python
 conda activate TTA
 
-REPO=/home/hpc/rlvl/rlvl168v/MainRepo/TDA
-RESULTS=/home/hpc/rlvl/rlvl168v/MainRepo/results
+MAIN="${SLURM_SUBMIT_DIR:-$(pwd)}"
+
+REPO=$MAIN/TDA
+RESULTS=$MAIN/results
 DATA_ROOT=$REPO/data
 
 mkdir -p "$RESULTS"
 cd "$REPO"
 
-DATASETS="caltech101 dtd eurosat fgvc food101 oxford_flowers oxford_pets stanford_cars ucf101"
+DATASETS="caltech101 dtd eurosat fgvc food101 oxford_flowers oxford_pets stanford_cars ucf101 sun397"
 
 for d in $DATASETS; do
     out="$RESULTS/CLIPviaTDA_${d}.txt"

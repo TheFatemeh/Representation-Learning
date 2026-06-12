@@ -4,7 +4,7 @@
 #SBATCH --gres=gpu:a100:1
 #SBATCH --partition=a100
 #SBATCH --time=12:00:00
-#SBATCH --output=output_sun_all_%j.txt
+#SBATCH --output=output/sun_all_%j.txt
 #SBATCH --export=NONE
 
 # Runs ALL reproduced methods on SUN397 in one job. Results use the existing per-method
@@ -20,7 +20,7 @@ export WANDB_MODE=disabled
 module load python
 conda activate TTA
 
-MAIN=/home/hpc/rlvl/rlvl168v/MainRepo
+MAIN="${SLURM_SUBMIT_DIR:-$(pwd)}"
 TCA=$MAIN/TCA
 TDA=$MAIN/TDA
 RES=$MAIN/results

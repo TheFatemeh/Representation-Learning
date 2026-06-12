@@ -14,9 +14,11 @@
 
 set -e
 
-DATA_ROOT="$(pwd)/TCA/data"
-SPLIT_DIR="$(pwd)/TCA"
-GDOWN=/home/hpc/rlvl/rlvl168v/.conda/envs/TTA/bin/gdown
+MAIN="${SLURM_SUBMIT_DIR:-$(pwd)}"
+
+DATA_ROOT=$MAIN/TCA/data
+SPLIT_DIR=$MAIN/TCA
+GDOWN=gdown
 mkdir -p "$DATA_ROOT"
 
 echo "=== Step 1: CoOp split files ==="
@@ -123,17 +125,22 @@ echo "  Done. Expected: $DATA_ROOT/cars_test/ and $DATA_ROOT/cars_train/"
 echo "[9/10] SUN397"
 mkdir -p "$DATA_ROOT/sun397"
 cd "$DATA_ROOT/sun397"
-KAGGLE_USER=$(python3 -c "import json; d=json.load(open('/home/hpc/rlvl/rlvl168v/.kaggle/kaggle.json')); print(d['username'])")
-KAGGLE_KEY=$(python3 -c "import json; d=json.load(open('/home/hpc/rlvl/rlvl168v/.kaggle/kaggle.json')); print(d['key'])")
-mkdir -p /scratch/rlvl168v
+KAGGLE_USER=$(python3 -c "import json; d=json.load(open('$HOME/.kaggle/kaggle.json')); print(d['username'])")
+KAGGLE_KEY=$(python3 -c "import json; d=json.load(open('$HOME/.kaggle/kaggle.json')); print(d['key'])")
+mkdir -p /scratch/$USER
 wget -c --show-progress \
     --user="$KAGGLE_USER" --password="$KAGGLE_KEY" \
     "https://www.kaggle.com/api/v1/datasets/download/hiuphmnhtrung/sun397" \
-    -O /scratch/rlvl168v/sun397.zip
-unzip -q /scratch/rlvl168v/sun397.zip -d "$DATA_ROOT/sun397"
-rm /scratch/rlvl168v/sun397.zip
-# Normalize: move SUN397/ up if it landed inside a subdirectory
-if [ ! -d "$DATA_ROOT/sun397/SUN397" ]; then
+    -O /scratch/$USER/sun397.zip
+unzip -q /scratch/$USER/sun397.zip -d "$DATA_ROOT/sun397"
+rm /scratch/$USER/sun397.zip
+# Normalize so images end at data/sun397/SUN397/<letter>/<category>/...
+# (the Kaggle zip double-nests as sun397/SUN397/SUN397/...)
+if [ -d "$DATA_ROOT/sun397/SUN397/SUN397" ]; then
+    mv "$DATA_ROOT/sun397/SUN397" "$DATA_ROOT/sun397/SUN397_outer"
+    mv "$DATA_ROOT/sun397/SUN397_outer/SUN397" "$DATA_ROOT/sun397/SUN397"
+    rm -rf "$DATA_ROOT/sun397/SUN397_outer"
+elif [ ! -d "$DATA_ROOT/sun397/SUN397" ]; then
     FOUND=$(find "$DATA_ROOT/sun397" -type d -name "SUN397" | head -1)
     [ -n "$FOUND" ] && mv "$FOUND" "$DATA_ROOT/sun397/SUN397"
 fi

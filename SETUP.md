@@ -1,11 +1,12 @@
 # Setup & Reproduction
 
 Reproduces the cross-dataset (CD) rows of Table 1 of the TCA paper — **CLIP, TCA(R=0.9),
-EViT(R=0.9), ToME(R=0.9), TDA** — plus a CLIP-via-TDA cross-check, on CLIP ViT-B/16.
+EViT(R=0.9), ToME(R=0.9), TDA**, plus a CLIP-via-TDA cross-check, on CLIP ViT-B/16.
 Run on the TinyGPU cluster (NHR@FAU); GPU jobs are submitted with `sbatch`.
 
 Results land in `results/` as `<METHOD>_<dataset>.txt` (e.g. `CLIP_eurosat.txt`,
-`TCA_R0.9_eurosat.txt`, `TDA_eurosat.txt`).
+`TCA_R0.9_eurosat.txt`, `TDA_eurosat.txt`). All run/download scripts live in `scripts/`;
+SLURM logs are written to `output/`.
 
 ---
 
@@ -26,7 +27,7 @@ conda install -n TTA -y --solver=libmamba "mkl<2024" mkl-service      # -> mkl 2
 # torch 2.1 was compiled against numpy 1.x:
 conda install -n TTA -y --solver=libmamba "numpy=1.26.4"
 # transformers 4.57 needs torch>=2.2 ('register_pytree_node'); TCA doesn't use transformers directly:
-/home/hpc/rlvl/rlvl168v/.conda/envs/TTA/bin/pip install transformers==4.46.2
+pip install transformers==4.46.2          # the env's pip (TTA already activated above)
 ```
 
 Sanity check on a GPU node: `python -c "import torch, clip, torchvision; print(torch.cuda.is_available())"`.
@@ -48,8 +49,8 @@ wget https://openaipublic.azureedge.net/clip/models/5806e77cd80f8b59890b7e101eab
 ## 3. Download datasets
 
 ```bash
-bash download_datasets.sh        # 9 CD datasets + all CoOp split JSONs
-bash download_sun.sh             # SUN397 images only (skipped earlier; ~37 GB)
+bash scripts/download_datasets.sh   # 10 CD datasets (incl. SUN397) + all CoOp split JSONs
+bash scripts/download_sun.sh        # SUN397 images only (if you skipped it earlier; ~37 GB)
 ```
 
 ## 4. Data-layout fixes (so the loaders resolve)
@@ -78,11 +79,14 @@ cd ../..
 ## 5. Reproduce Table 1 (submit on TinyGPU)
 
 ```bash
-sbatch run_clip_zeroshot.sh   # CLIP        -> results/CLIP_<ds>.txt
-sbatch run_tca_repro.sh       # TCA R=0.9   -> results/TCA_R0.9_<ds>.txt   (token_pruning Ours-0.035)
-sbatch run_evit.sh            # EViT R=0.9  -> results/EViT_R0.9_<ds>.txt   (clip_zeroshot + EViT-0.1)
-sbatch run_tome.sh            # ToME R=0.9  -> results/ToME_R0.9_<ds>.txt   (clip_zeroshot + ToME-0.1)
-sbatch run_gflops.sh          # GFLOPs all  -> results/GFLOPs.txt
+sbatch scripts/run_clip_zeroshot.sh   # CLIP        -> results/CLIP_<ds>.txt
+sbatch scripts/run_tca_repro.sh       # TCA R=0.9   -> results/TCA_R0.9_<ds>.txt   (token_pruning Ours-0.035)
+sbatch scripts/run_evit.sh            # EViT R=0.9  -> results/EViT_R0.9_<ds>.txt   (clip_zeroshot + EViT-0.1)
+sbatch scripts/run_tome.sh            # ToME R=0.9  -> results/ToME_R0.9_<ds>.txt   (clip_zeroshot + ToME-0.1)
+sbatch scripts/run_gflops.sh          # GFLOPs all  -> results/GFLOPs.txt
+
+(All run scripts already include `sun397` in their dataset list — once its images are downloaded,
+these cover it too.)
 ```
 
 ## 6. TDA baseline (official repo, data symlinked from TCA — no re-download)
@@ -102,6 +106,7 @@ mkdir -p "$T/oxford_flowers"; ln -sfn "$TCA/data/oxford_flowers/jpg" "$T/oxford_
 mkdir -p "$T/oxford_pets"; ln -sfn "$TCA/data/oxford_pets/images" "$T/oxford_pets/images"; ln -sfn "$S/split_zhou_OxfordPets.json" "$T/oxford_pets/split_zhou_OxfordPets.json"
 mkdir -p "$T/stanford_cars"; ln -sfn "$TCA/data/cars_test" "$T/stanford_cars/cars_test"; ln -sfn "$S/split_zhou_StanfordCars.json" "$T/stanford_cars/split_zhou_StanfordCars.json"
 mkdir -p "$T/ucf101"; ln -sfn "$TCA/data/ucf101/UCF-101-midframes" "$T/ucf101/UCF-101-midframes"; ln -sfn "$S/split_zhou_UCF101.json" "$T/ucf101/split_zhou_UCF101.json"
+mkdir -p "$T/sun397"; ln -sfn "$TCA/data/sun397/SUN397" "$T/sun397/SUN397"; ln -sfn "$S/split_zhou_SUN397.json" "$T/sun397/split_zhou_SUN397.json"
 
 # CLIP-via-TDA configs (both caches OFF -> pure CLIP through TDA's pipeline):
 mkdir -p TDA/configs_clip
@@ -109,19 +114,20 @@ for d in caltech101 dtd eurosat fgvc food101 oxford_flowers oxford_pets stanford
     sed 's/enabled: True/enabled: False/g' TDA/configs/$d.yaml > TDA/configs_clip/$d.yaml
 done
 
-sbatch run_tda.sh             # TDA          -> results/TDA_<ds>.txt
-sbatch run_clip_via_tda.sh    # CLIP via TDA -> results/CLIPviaTDA_<ds>.txt
+sbatch scripts/run_tda.sh             # TDA          -> results/TDA_<ds>.txt
+sbatch scripts/run_clip_via_tda.sh    # CLIP via TDA -> results/CLIPviaTDA_<ds>.txt
 ```
 Note: `tda_runner.py` was patched with a guarded `wandb.init(mode="disabled")` (its `wandb.log`
 is called every image) and a GFLOPs print; the run scripts also set `WANDB_MODE=disabled`.
 
-## 7. SUN397 (run after the download above)
+## 7. SUN397 (convenience scripts)
 
-`download_sun.sh` (step 3) fetches the SUN397 images; then run every method on it in one job:
+`sun397` is already in every run script above, so steps 5–6 cover it once its images are
+downloaded. If you ran the other 9 datasets first and only need to add SUN397:
 
 ```bash
-sbatch run_sun_all.sh         # CLIP/TCA/EViT/ToME/TDA/CLIP-via-TDA on SUN397
-                              # -> results/{CLIP,TCA_R0.9,EViT_R0.9,ToME_R0.9,TDA,CLIPviaTDA}_sun397.txt
+sbatch scripts/run_sun_all.sh   # all 6 methods on SUN397 only -> results/*_sun397.txt
+sbatch scripts/run_sun_tda.sh   # just TDA on SUN397
 ```
 
 ---

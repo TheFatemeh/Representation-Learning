@@ -4,7 +4,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --partition=rtx3080
 #SBATCH --time=04:00:00
-#SBATCH --output=output_sun_tda_%j.txt
+#SBATCH --output=output/sun_tda_%j.txt
 #SBATCH --export=NONE
 
 # Runs ONLY TDA on SUN397 -> results/TDA_sun397.txt
@@ -17,7 +17,7 @@ export WANDB_MODE=disabled
 module load python
 conda activate TTA
 
-MAIN=/home/hpc/rlvl/rlvl168v/MainRepo
+MAIN="${SLURM_SUBMIT_DIR:-$(pwd)}"
 TCA=$MAIN/TCA
 TDA=$MAIN/TDA
 RES=$MAIN/results

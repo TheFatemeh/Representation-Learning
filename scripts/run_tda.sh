@@ -4,12 +4,12 @@
 #SBATCH --gres=gpu:1
 #SBATCH --partition=rtx3080
 #SBATCH --time=10:00:00
-#SBATCH --output=output_tda_%j.txt
+#SBATCH --output=output/tda_%j.txt
 #SBATCH --export=NONE
 
 # Reproduces the TDA row of Table 1 (CLIP ViT-B/16, cross-dataset benchmark) using the OFFICIAL
 # TDA repo (kdiAAA/TDA). Data is symlinked from TCA/data (no re-download). Each dataset is its own
-# process -> results/TDA_<ds>.txt. SUN397 omitted (not downloaded).
+# process -> results/TDA_<ds>.txt. SUN397 now included (download it first).
 
 unset SLURM_EXPORT_ENV
 export WANDB_MODE=disabled          # tda_runner.py calls wandb.log() every image, unconditionally
@@ -17,14 +17,16 @@ export WANDB_MODE=disabled          # tda_runner.py calls wandb.log() every imag
 module load python
 conda activate TTA
 
-REPO=/home/hpc/rlvl/rlvl168v/MainRepo/TDA
-RESULTS=/home/hpc/rlvl/rlvl168v/MainRepo/results
+MAIN="${SLURM_SUBMIT_DIR:-$(pwd)}"
+
+REPO=$MAIN/TDA
+RESULTS=$MAIN/results
 DATA_ROOT=$REPO/data
 
 mkdir -p "$RESULTS"
 cd "$REPO"
 
-DATASETS="caltech101 dtd eurosat fgvc food101 oxford_flowers oxford_pets stanford_cars ucf101"
+DATASETS="caltech101 dtd eurosat fgvc food101 oxford_flowers oxford_pets stanford_cars ucf101 sun397"
 
 for d in $DATASETS; do
     out="$RESULTS/TDA_${d}.txt"

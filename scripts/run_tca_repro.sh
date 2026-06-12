@@ -4,7 +4,7 @@
 #SBATCH --gres=gpu:a100:1
 #SBATCH --partition=a100
 #SBATCH --time=08:00:00
-#SBATCH --output=output_tca_repro_%j.txt
+#SBATCH --output=output/tca_repro_%j.txt
 #SBATCH --export=NONE
 
 # Reproduces Table-1 row TCA(R=0.9), CLIP ViT-B/16, cross-dataset benchmark.
@@ -17,15 +17,16 @@ unset SLURM_EXPORT_ENV
 module load python
 conda activate TTA
 
-REPO=/home/hpc/rlvl/rlvl168v/MainRepo/TCA
-RESULTS=/home/hpc/rlvl/rlvl168v/MainRepo/results
+MAIN="${SLURM_SUBMIT_DIR:-$(pwd)}"
+
+REPO=$MAIN/TCA
+RESULTS=$MAIN/results
 DATA_ROOT=$REPO/data
 
 mkdir -p "$RESULTS"
 cd "$REPO"
 
-DATASETS="fgvc caltech101 stanford_cars dtd eurosat oxford_flowers food101 oxford_pets ucf101"
-# DATASETS="$DATASETS sun397"   # add once data/sun397/SUN397 exists
+DATASETS="fgvc caltech101 stanford_cars dtd eurosat oxford_flowers food101 oxford_pets ucf101 sun397"
 
 for d in $DATASETS; do
     out="$RESULTS/TCA_R0.9_${d}.txt"
