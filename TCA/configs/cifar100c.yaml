@@ -1,0 +1,10 @@
+# CIFAR-100-C (Table 2). The paper gives NO TCA hyper-parameters for CIFAR-100-C
+# (no reservoir_size M, scale, lambd, beta, R, alpha, or merge:prune ratio anywhere,
+# incl. the supplementary). We adopt the EuroSAT config verbatim: among the published
+# datasets EuroSAT is the closest analog to CIFAR-100-C (low CLIP zero-shot accuracy,
+# reliance on low-level visual cues, and the dataset where TCA shows its largest gain
+# over CLIP — exactly the behaviour Table 2 reports). See summary/Table2.md.
+reservoir_size: 2
+scale: 5
+lambd: 8
+beta: 7

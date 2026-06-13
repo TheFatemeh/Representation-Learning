@@ -19,6 +19,7 @@ MAIN="${SLURM_SUBMIT_DIR:-$(pwd)}"
 DATA_ROOT=$MAIN/TCA/data
 SPLIT_DIR=$MAIN/TCA
 GDOWN=gdown
+KAGGLE=kaggle
 mkdir -p "$DATA_ROOT"
 
 echo "=== Step 1: CoOp split files ==="

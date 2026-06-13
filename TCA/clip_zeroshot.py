@@ -13,7 +13,7 @@ import torch
 from tqdm import tqdm
 
 import clip
-from utils import build_test_data_loader, clip_classifier, cls_acc
+from utils import build_test_data_loader, clip_classifier, cls_acc, wrap_effective_res
 from measure_gflops import measure_visual_gflops
 from datasets.imagenet_a import templates as IMAGENET_80_TEMPLATES
 
@@ -41,6 +41,10 @@ def get_arguments():
     parser.add_argument('--token_pruning', type=str, default='Ours-0.0',
                         help='Visual-encoder token reduction (NO TCA reservoir): Ours-0.0 = none '
                              '(CLIP baseline); EViT-0.1 / ToME-0.1 = EViT/ToME R=0.9 baselines.')
+    parser.add_argument('--effective-res', dest='effective_res', type=int, default=0,
+                        help='Simulate low-resolution CLIP input: resize to NxN before the 224 '
+                             'preprocess (0 = off, full 224 baseline). Tests whether the paper\'s '
+                             'low CIFAR-100-C CLIP numbers come from a degraded input pipeline.')
     return parser.parse_args()
 
 
@@ -74,6 +78,9 @@ def main():
     # No TCA reservoir/adaptation — just the (optionally token-reduced) CLIP forward.
     clip_model, preprocess = clip.load(args.backbone, args.token_pruning)
     clip_model.eval()
+    preprocess = wrap_effective_res(preprocess, args.effective_res)
+    if args.effective_res:
+        print(f'effective input resolution: {args.effective_res}x{args.effective_res} px (then upsampled to 224)')
 
     gflops = measure_visual_gflops(clip_model)
     print(f'token_pruning: {args.token_pruning}  |  GFLOPs (visual encoder, per image): {gflops:.2f}')

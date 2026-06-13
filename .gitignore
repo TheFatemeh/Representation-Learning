@@ -3,3 +3,5 @@ __pycache__/
 tmp_out
 results/
 TCA/data/
+results-t2/
+output-t2/

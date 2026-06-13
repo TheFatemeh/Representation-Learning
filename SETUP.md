@@ -80,6 +80,7 @@ cd ../..
 
 ```bash
 sbatch scripts/run_clip_zeroshot.sh   # CLIP        -> results/CLIP_<ds>.txt
+sbatch scripts/run_clip_80prompts.sh  # CLIP from TPT
 sbatch scripts/run_tca_repro.sh       # TCA R=0.9   -> results/TCA_R0.9_<ds>.txt   (token_pruning Ours-0.035)
 sbatch scripts/run_evit.sh            # EViT R=0.9  -> results/EViT_R0.9_<ds>.txt   (clip_zeroshot + EViT-0.1)
 sbatch scripts/run_tome.sh            # ToME R=0.9  -> results/ToME_R0.9_<ds>.txt   (clip_zeroshot + ToME-0.1)

@@ -246,11 +246,29 @@ def get_clip_logits(images, clip_model, clip_weights):
         return image_features, clip_logits, loss, prob_map, pred, cls_token_list
 
 
+def wrap_effective_res(preprocess, n):
+    """Simulate evaluating CLIP at an effective input resolution of n px.
+
+    Inserts a Resize(n,n) BEFORE the standard CLIP preprocess (which then upsamples
+    back to 224). This passes the image through an n x n bottleneck — a no-model-surgery
+    proxy for low-resolution inference — used to test whether the paper's much lower
+    CIFAR-100-C CLIP numbers come from a degraded (low-res) input pipeline.
+
+    n <= 0 (or falsy) returns the preprocess unchanged (full 224 baseline).
+    """
+    if not n or n <= 0:
+        return preprocess
+    return transforms.Compose([transforms.Resize((n, n), interpolation=BICUBIC), preprocess])
+
+
 def get_config_file(config_path, dataset_name):
     if dataset_name == "I":
         config_name = "imagenet.yaml"
     elif dataset_name in ["A", "V", "R", "S"]:
         config_name = f"imagenet_{dataset_name.lower()}.yaml"
+    elif dataset_name.startswith("cifar100c"):
+        # all cifar100c-<corruption>-<severity> runs share one config
+        config_name = "cifar100c.yaml"
     else:
         config_name = f"{dataset_name}.yaml"
     
@@ -273,6 +291,17 @@ def build_test_data_loader(dataset_name, root_path, preprocess, vis_mask: bool =
     elif dataset_name in ['A','V','R','S']:
         dataset = build_dataset(f"imagenet-{dataset_name.lower()}", root_path)
         test_loader = build_data_loader(data_source=dataset.test, batch_size=1, is_train=False, tfm=preprocess, shuffle=True)
+
+    elif dataset_name.startswith('cifar100c'):
+        # name format: cifar100c-<corruption>-<severity>, e.g. cifar100c-contrast-5.
+        # corruption never contains a dash; severity is the last token.
+        from datasets.cifar100c import CIFAR100C, CIFAR100_CLASSNAMES, templates as cifar_templates
+        parts = dataset_name.split('-')
+        corruption = '-'.join(parts[1:-1])
+        severity = parts[-1]
+        dataset = CIFAR100C(root_path, corruption, severity, preprocess)
+        test_loader = torch.utils.data.DataLoader(dataset, batch_size=1, num_workers=16, shuffle=True)
+        return test_loader, CIFAR100_CLASSNAMES, cifar_templates
 
     elif dataset_name in ['caltech101','dtd','eurosat','fgvc','food101','oxford_flowers','oxford_pets','stanford_cars','sun397','ucf101']:
         dataset = build_dataset(dataset_name, root_path)
