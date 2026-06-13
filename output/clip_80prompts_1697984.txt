@@ -1,0 +1,48 @@
+### Starting TaskPrologue of job 1697984 on tg080 at Sat Jun 13 02:33:55 PM CEST 2026
+Running on cores 0-1,16-17,32-33,48-49 with governor powersave
+Sat Jun 13 14:33:55 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 3080        On  |   00000000:1A:00.0 Off |                  N/A |
+| 30%   33C    P8             18W /  300W |       1MiB /  10240MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+[14:33:56] >>> running sun397  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_sun397.txt
+[14:39:27] <<< sun397 finished (rc=0)
+[14:39:27] all datasets attempted. 80-prompt CLIP results in: /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_*.txt
+=== JOB_STATISTICS ===
+=== current date     : Sat Jun 13 02:39:28 PM CEST 2026
+= Job-ID             : 1697984 on tinygpu
+= Job-Name           : clip_80prompts
+= Job-Command        : /home/hpc/rlvl/rlvl168v/MainRepo/scripts/run_clip_80prompts.sh
+= Initial workdir    : /home/hpc/rlvl/rlvl168v/MainRepo
+= Queue/Partition    : rtx3080
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 08:00:00
+= Elapsed runtime    : 00:05:32
+= Total RAM usage    : 10.4 GiB of requested  GiB (%)   
+= Node list          : tg080
+= Subm/Elig/Start/End: 2026-06-13T14:33:54 / 2026-06-13T14:33:54 / 2026-06-13T14:33:55 / 2026-06-13T14:39:27
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+!!! /home/hpc             105.6G   104.9G   209.7G  -29086days     242K     500K   1,000K        N/A !!!
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]
+NVIDIA GeForce RTX 3080, 00000000:1A:00.0, 1801516, 22 %, 5 %, 832 MiB, 279132 ms

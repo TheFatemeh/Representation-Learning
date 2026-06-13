@@ -1,0 +1,73 @@
+### Starting TaskPrologue of job 1696058 on tg085 at Fri Jun 12 06:14:40 PM CEST 2026
+Running on cores 10-11,26-27,42-43,58-59 with governor powersave
+Fri Jun 12 18:14:40 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 3080        On  |   00000000:B2:00.0 Off |                  N/A |
+| 33%   54C    P8             17W /  300W |       1MiB /  10240MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+[18:14:41] >>> running fgvc  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_fgvc.txt
+[18:16:42] <<< fgvc finished (rc=0)
+[18:16:42] >>> running caltech101  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_caltech101.txt
+[18:17:36] <<< caltech101 finished (rc=0)
+[18:17:36] >>> running stanford_cars  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_stanford_cars.txt
+[18:19:59] <<< stanford_cars finished (rc=0)
+[18:19:59] >>> running dtd  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_dtd.txt
+[18:20:39] <<< dtd finished (rc=0)
+[18:20:39] >>> running eurosat  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_eurosat.txt
+[18:22:51] <<< eurosat finished (rc=0)
+[18:22:51] >>> running oxford_flowers  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_oxford_flowers.txt
+[18:23:46] <<< oxford_flowers finished (rc=0)
+[18:23:46] >>> running food101  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_food101.txt
+[18:30:56] <<< food101 finished (rc=0)
+[18:30:56] >>> running oxford_pets  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_oxford_pets.txt
+[18:32:06] <<< oxford_pets finished (rc=0)
+[18:32:06] >>> running ucf101  ->  /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_ucf101.txt
+[18:33:20] <<< ucf101 finished (rc=0)
+[18:33:20] all datasets attempted. 80-prompt CLIP results in: /home/hpc/rlvl/rlvl168v/MainRepo/results/CLIP80_*.txt
+=== JOB_STATISTICS ===
+=== current date     : Fri Jun 12 06:33:21 PM CEST 2026
+= Job-ID             : 1696058 on tinygpu
+= Job-Name           : clip_80prompts
+= Job-Command        : /home/hpc/rlvl/rlvl168v/MainRepo/scripts/run_clip_80prompts.sh
+= Initial workdir    : /home/hpc/rlvl/rlvl168v/MainRepo
+= Queue/Partition    : rtx3080
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 08:00:00
+= Elapsed runtime    : 00:18:47
+= Total RAM usage    : 6.4 GiB of requested  GiB (%)   
+= Node list          : tg085
+= Subm/Elig/Start/End: 2026-06-12T17:44:42 / 2026-06-12T17:44:42 / 2026-06-12T18:14:33 / 2026-06-12T18:33:20
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/hpc              57.3G   104.9G   209.7G        N/A     331K     500K   1,000K        N/A    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]
+NVIDIA GeForce RTX 3080, 00000000:B2:00.0, 1933857, 16 %, 4 %, 830 MiB, 65877 ms
+NVIDIA GeForce RTX 3080, 00000000:B2:00.0, 1935223, 19 %, 5 %, 830 MiB, 45062 ms
+NVIDIA GeForce RTX 3080, 00000000:B2:00.0, 1936373, 19 %, 5 %, 832 MiB, 134928 ms
+NVIDIA GeForce RTX 3080, 00000000:B2:00.0, 1937612, 17 %, 4 %, 830 MiB, 32217 ms
+NVIDIA GeForce RTX 3080, 00000000:B2:00.0, 1938947, 18 %, 3 %, 830 MiB, 125498 ms
+NVIDIA GeForce RTX 3080, 00000000:B2:00.0, 1940171, 18 %, 5 %, 830 MiB, 46328 ms
+NVIDIA GeForce RTX 3080, 00000000:B2:00.0, 1941321, 20 %, 4 %, 832 MiB, 423269 ms
+NVIDIA GeForce RTX 3080, 00000000:B2:00.0, 1942982, 17 %, 4 %, 830 MiB, 61645 ms
+NVIDIA GeForce RTX 3080, 00000000:B2:00.0, 1944133, 18 %, 5 %, 832 MiB, 66023 ms

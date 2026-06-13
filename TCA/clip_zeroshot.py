@@ -15,6 +15,7 @@ from tqdm import tqdm
 import clip
 from utils import build_test_data_loader, clip_classifier, cls_acc
 from measure_gflops import measure_visual_gflops
+from datasets.imagenet_a import templates as IMAGENET_80_TEMPLATES
 
 CD_DATASETS = [
     'caltech101', 'dtd', 'eurosat', 'fgvc', 'food101',
@@ -33,6 +34,10 @@ def get_arguments():
     parser.add_argument('--single-template', dest='single_template', action='store_true',
                         help='Use one generic prompt "a photo of a {}." for ALL datasets '
                              '(tests whether the paper CLIP row used a single template).')
+    parser.add_argument('--imagenet-ensemble', dest='imagenet_ensemble', action='store_true',
+                        help='Use the 80 hand-crafted ImageNet prompts (Radford et al.) for ALL '
+                             'datasets — the TPT-paper "Ensemble" protocol the paper CLIP row '
+                             'was inherited from.')
     parser.add_argument('--token_pruning', type=str, default='Ours-0.0',
                         help='Visual-encoder token reduction (NO TCA reservoir): Ours-0.0 = none '
                              '(CLIP baseline); EViT-0.1 / ToME-0.1 = EViT/ToME R=0.9 baselines.')
@@ -81,8 +86,13 @@ def main():
         )
         if args.single_template:
             template = ['a photo of a {}.']
-        print(f'  prompt: {"single generic" if args.single_template else "official ensemble"}'
-              f' ({len(template)} template(s))')
+            prompt_mode = 'single generic'
+        elif args.imagenet_ensemble:
+            template = IMAGENET_80_TEMPLATES
+            prompt_mode = 'ImageNet 80-prompt ensemble'
+        else:
+            prompt_mode = 'official ensemble'
+        print(f'  prompt: {prompt_mode} ({len(template)} template(s))')
         clip_weights = clip_classifier(classnames, template, clip_model)
         acc = run_zeroshot(test_loader, clip_model, clip_weights)
         results[dataset_name] = acc

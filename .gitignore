@@ -2,3 +2,4 @@ __pycache__/
 *.pyc
 tmp_out
 results/
+TCA/data/
