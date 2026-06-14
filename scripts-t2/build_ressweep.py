@@ -27,7 +27,7 @@ PAPER_CLIP = {
 }
 
 ACC_PATTERNS = [
-    re.compile(r'Final test accuracy:\s*([0-9.]+)'),   # runner.py (TCA)
+    re.compile(r'Final test accuracy:\s*([0-9]+\.[0-9]+)'),   # runner.py (TCA); avoid trailing '.'
     re.compile(r'Accuracy:\s*([0-9.]+)%'),             # clip_zeroshot.py (CLIP/EViT)
 ]
 
