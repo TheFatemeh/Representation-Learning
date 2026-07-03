@@ -1,0 +1,59 @@
+### Starting TaskPrologue of job 1721535 on tg092 at Sun Jun 28 04:14:17 PM CEST 2026
+Running on cores 64-95 with governor ondemand
+Sun Jun 28 16:14:17 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          On  |   00000000:81:00.0 Off |                    0 |
+| N/A   34C    P0             54W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+Traceback (most recent call last):
+  File "/home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest/runner.py", line 16, in <module>
+    import clip
+  File "/home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest/clip/__init__.py", line 1, in <module>
+    from .clip import *
+  File "/home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest/clip/clip.py", line 27, in <module>
+    _tokenizer = _Tokenizer()
+  File "/home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest/clip/simple_tokenizer.py", line 66, in __init__
+    merges = gzip.open(bpe_path).read().decode("utf-8").split('\n')
+  File "/home/hpc/rlvl/rlvl168v/.conda/envs/TTA/lib/python3.9/gzip.py", line 58, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+  File "/home/hpc/rlvl/rlvl168v/.conda/envs/TTA/lib/python3.9/gzip.py", line 173, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: '/home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest/clip/bpe_simple_vocab_16e6.txt.gz'
+=== JOB_STATISTICS ===
+=== current date     : Sun Jun 28 04:15:12 PM CEST 2026
+= Job-ID             : 1721535 on tinygpu
+= Job-Name           : tca_smoke
+= Job-Command        : /home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest/smoke_clean.sbatch
+= Initial workdir    : /home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest
+= Queue/Partition    : a100
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 01:00:00
+= Elapsed runtime    : 00:01:15
+= Total RAM usage    : 0.5 GiB of requested  GiB (%)   
+= Node list          : tg092
+= Subm/Elig/Start/End: 2026-06-28T15:53:26 / 2026-06-28T15:53:26 / 2026-06-28T16:13:57 / 2026-06-28T16:15:12
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/hpc              31.2G   104.9G   209.7G        N/A     166K     500K   1,000K        N/A    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]

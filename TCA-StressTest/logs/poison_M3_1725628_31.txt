@@ -1,0 +1,64 @@
+### Starting TaskPrologue of job 1725704 on tg094 at Wed Jul  1 05:46:53 PM CEST 2026
+Running on cores 64-71,104-127 with governor ondemand
+Wed Jul  1 17:46:53 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          On  |   00000000:81:00.0 Off |                    0 |
+| N/A   34C    P0             54W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+task=31  rule=diversity  M=3  target=1  host=tg094
+Processing eurosat dataset.
+
+Running dataset configurations:
+{'reservoir_size': 2, 'scale': 5, 'lambd': 8, 'beta': 7} 
+
+Reading split from split_zhou_EuroSat.json
+Processed test images:   0%|          | 0/8100 [00:00<?, ?it/s]Processed test images:   0%|          | 0/8100 [00:01<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest/runner.py", line 326, in <module>
+    main()
+  File "/home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest/runner.py", line 319, in main
+    acc = run_test_tca(cfg, test_loader, clip_model, clip_weights, args)
+  File "/home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest/runner.py", line 252, in run_test_tca
+    final_logits += compute_reservoir_logits(cls_token_list, params['scale'], reservoir,
+  File "/home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest/runner.py", line 124, in compute_reservoir_logits
+    reservoir_token_keys = torch.cat(reservoir_token_keys, dim=0)
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument tensors in method wrapper_CUDA_cat)
+=== JOB_STATISTICS ===
+=== current date     : Wed Jul  1 05:47:13 PM CEST 2026
+= Job-ID             : 1725704 on tinygpu
+= Job-Name           : tca_pois_M3
+= Job-Command        : /home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest/scripts/sweep_poison_M3.sbatch
+= Initial workdir    : /home/hpc/rlvl/rlvl168v/MainRepo/TCA-StressTest
+= Queue/Partition    : a100
+= Slurm account      : rlvl with QOS=normal
+= Requested resources:  for 01:00:00
+= Elapsed runtime    : 00:00:25
+= Total RAM usage    : 1.0 GiB of requested  GiB (%)   
+= Node list          : tg094
+= Subm/Elig/Start/End: 2026-07-01T17:18:44 / 2026-07-01T17:18:46 / 2026-07-01T17:46:48 / 2026-07-01T17:47:13
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/woody             0.0K  1000.0G  1500.0G        N/A       1    5,000K   7,500K        N/A    
+    /home/hpc              31.4G   104.9G   209.7G        N/A     167K     500K   1,000K        N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]
+NVIDIA A100-SXM4-40GB, 00000000:81:00.0, 4112266, 1 %, 0 %, 894 MiB, 6185 ms
