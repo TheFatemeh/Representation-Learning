@@ -1,4 +1,3 @@
-import os
 from collections import OrderedDict
 from typing import Tuple, Union
 
@@ -333,8 +332,7 @@ class ResidualAttentionBlock_Ours(nn.Module):
             x_others = torch.gather(non_cls, dim=0, index=index)  
             x_cluster = torch.gather(non_cls, dim=0, index=cluster_index) 
             
-            # K merge centers: code default 4; paper uses K=2 (supp Tab. 10). Override via env.
-            merged_tokens = coreset_averaging(x_cluster, num_centers=int(os.environ.get("TCA_MERGE_K", 4)))
+            merged_tokens = coreset_averaging(x_cluster, num_centers=4)
             if len(merged_tokens.shape) == 3:
                 merged_tokens = merged_tokens.half()
             else:

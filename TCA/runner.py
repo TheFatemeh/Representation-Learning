@@ -29,11 +29,6 @@ def get_arguments():
     parser.add_argument('--token_sim', dest='token_sim', default=True, help='Using token-level cosine similarity of features as a guidence of caching.')
     parser.add_argument('--flag', dest='flag', default=True, help='fuse sim cls with current sample.')
 
-    parser.add_argument('--effective-res', dest='effective_res', type=int, default=0,
-                        help='Simulate low-resolution CLIP input: resize to NxN before the 224 '
-                             'preprocess (0 = off). Used to test whether TCA gains only appear '
-                             'when the CLIP baseline is degraded (low-res).')
-
     args = parser.parse_args()
 
     return args
@@ -168,9 +163,6 @@ def main():
     # Initialize CLIP model
     clip_model, preprocess = clip.load(args.backbone, args.token_pruning)
     clip_model.eval()
-    preprocess = wrap_effective_res(preprocess, args.effective_res)
-    if args.effective_res:
-        print(f'effective input resolution: {args.effective_res}x{args.effective_res} px (then upsampled to 224)')
 
     # Set random seed
     seed = 1

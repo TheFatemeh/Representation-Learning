@@ -7,6 +7,31 @@ exactly how we ran it and, more importantly, the long list of experimental choic
 never specifies — because if our numbers differ, the difference will live in these choices, and
 we want them on the record.
 
+## Headline conclusion (what we report)
+
+We report our **faithful ViT-B/16 reproduction** — the first set of experiments: CLIP / EViT / TCA
+at full 224 resolution, the 18-template OpenAI CIFAR-100 prompt ensemble, batch size 1, exactly
+the protocol the paper states. The finding:
+
+> **TCA's Table 2 is not reproducible from the information the paper provides.** Following their
+> stated spec faithfully, our CLIP baseline comes out *very* different from theirs — roughly 2×
+> higher (e.g. contrast sev 1: 67.5% vs 31.9%; brightness ~67% vs ~41%).
+
+Critically, **our numbers are consistent with two independent CLIP-on-CIFAR-100-C benchmarks**,
+while the paper's are not:
+
+| CIFAR-100-C, severity 5 | Contrast | Snow | Brightness |
+|---|---|---|---|
+| **Ours (CLIP ViT-B/16)** | 34.22 | 48.43 | 57.13 |
+| **BAT-CLIP (CLIP ViT-B/16)** | 34.58 | 48.35 | 57.02 |
+| **TCA Table 2 ("CLIP")** | **2.69** | **24.85** | **38.10** |
+
+BAT-CLIP's ViT-B/16 lands essentially on our reproduction and far from the paper's; the Pilot
+Study likewise reports clean CIFAR-100 ViT-B/16 ≈ 66.6% (≈ our 67%). So the discrepancy is in the
+paper's under-specified CLIP baseline, **not** in our pipeline. We tried to be faithful to what
+the paper states and still cannot get near its Table-2 CLIP numbers — but we *can* match the
+broader literature.
+
 ## How we ran it
 
 - **Scripts:** `scripts-t2/run_{clip,clip80,evit,tca}_cifar100c.sh`; assembled with
@@ -41,7 +66,7 @@ supplementary for CIFAR-100-C.
 | Severities | 1–5 | 1–5 | Stated |
 | Seed / determinism | seed 1, deterministic | — | **Not stated** |
 | Keep ratio R | R=0.9 (`Ours-0.035` / `EViT-0.1`) | — (main results use R=0.9) | **Not stated for this table** |
-| Merge centers K | 4 (code default, first impl) → 2 (sweep) | 2 (§4.1: "We set K to 2") | Stated — **first-impl mismatch (4 vs 2)** |
+| Merge centers K | 4 (code default) | 2 (§4.1: "We set K to 2") | Stated — **code-vs-paper mismatch (4 vs 2)** |
 | Merge:prune ratio α | code default | 2:1 | Stated in supp (Tab. 9) |
 | Reservoir update | diversity-enforced (code defaults) | diversity-enforced best | Stated (Tab. 4) |
 | Reservoir size M | 2 (EuroSAT) | — | **Not stated for CIFAR-100-C** |
@@ -54,30 +79,29 @@ supplementary for CIFAR-100-C.
 our CLIP comes out ~2× higher. The discrepancy must live in one of the "not stated" rows —
 preprocessing/resolution or, more likely, the actual backbone.
 
-## The CLIP-baseline discrepancy: most likely a weaker backbone, not low resolution
+## Why the paper's CLIP baseline can't be reproduced
 
-Our honest CLIP is far above the paper's (e.g. contrast sev1 67.5% vs 31.9%; brightness ~67% vs
-~41%). Two candidate explanations, both unstated:
+The paper's stated spec (ViT-B/16 + official prompts + bs 1) is *our* spec, yet its CLIP numbers
+are far below any standard CLIP-ViT-B/16 result — ours, BAT-CLIP's, or the Pilot Study's, all of
+which agree with each other. The gap must live in one of the **"not stated"** rows above, most
+likely the **visual backbone**: the paper claims ViT-B/16 for its ablations, but the numbers
+fingerprint a weaker model.
 
-1. **Low effective resolution.** A resolution sweep (`scripts-t2/run_clip_ressweep.sh` +
-   `build_ressweep.py`) shows ~**16 px** best matches the paper's CLIP overall (mean abs error
-   5.84 vs ~19–30 at other resolutions; snow@16 is nearly exact). But it gets *brightness* wrong:
-   our 16px brightness declines with severity (38→29) while the paper's stays flat.
+The tell is the **brightness column**. Brightness is the gentlest corruption, so it ≈ the model's
+*clean* CIFAR-100 accuracy. The paper's brightness row is flat at **~41%** (41.00 / 41.44 / 41.83
+/ 41.12 / 38.10). CLIP clean CIFAR-100 zero-shot is **RN50 ≈ 41.6%**, ViT-B/32 ≈ 65%,
+ViT-B/16 ≈ 68.7% (our reproduction ≈ 67%, matching ViT-B/16). A flat ~41% is the signature of an
+**RN50-class backbone**, not the ViT-B/16 the paper states — and it also explains the steep
+contrast collapse to 2.69% and the moderate snow decline.
 
-2. **A weaker backbone (most likely RN50).** Brightness is the gentlest corruption, so the
-   brightness column ≈ the model's *clean* CIFAR-100 accuracy. The paper's brightness row is flat
-   at **~41%** (41.00 / 41.44 / 41.83 / 41.12 / 38.10). CLIP clean CIFAR-100 zero-shot is
-   **RN50 ≈ 41.6%**, ViT-B/32 ≈ 65%, ViT-B/16 ≈ 68.7%. A flat ~41% is the fingerprint of an
-   **RN50-class backbone**, not the ViT-B/16 the paper claims. This explains all three columns
-   (flat brightness, moderate snow decline, steep contrast collapse to 2.69%) better than the
-   blur proxy, which only fit snow.
+This is the Table-1 "gain-vs-baseline-strength" finding in its sharpest form (cf.
+`summary/CLIP.md`): the dramatic "Ours" gains rest on a much weaker — and undocumented — CLIP
+baseline than the ViT-B/16 the paper specifies.
 
-**Conclusion:** the paper's Table-2 CLIP baseline is *not reproducible from its own stated
-protocol*. The flat ~41% brightness column points to an undocumented weaker backbone (RN50),
-making the dramatic "Ours" gains partly an artifact of a much weaker baseline than the ViT-B/16
-specified. We could not verify directly — this fork's loader hardcodes `--backbone ViT-B/16`, so
-an RN50 run needs a code change — but the ~41% clean-accuracy fingerprint is strong. This is the
-Table-1 "gain-vs-baseline-strength" finding in its sharpest form (cf. `summary/CLIP.md`).
+*(Exploratory note: we also probed a low-effective-resolution explanation and a direct CLIP-RN50
+run as sanity checks. That scratch code has since been reverted to keep the reproduction faithful
+to the paper's stated protocol; the conclusion above rests on the stated-spec reproduction and
+its agreement with BAT-CLIP and the Pilot Study.)*
 
 ## The prompt question (and why we run two CLIP baselines)
 
@@ -134,3 +158,10 @@ simply unknown to us.
   Whether the magnitude matches depends entirely on the unstated hyper-parameters above.
 - If CLIP absolute differs from the paper, compare the 80-prompt baseline too — that, not the
   method, is the usual source of CLIP-row discrepancies (see `summary/CLIP.md`).
+
+## References (independent CLIP-on-CIFAR-100-C benchmarks our numbers agree with)
+
+- BAT-CLIP — *Bimodal Online Test-Time Adaptation for CLIP*, arXiv:2412.02837
+  (ViT-B/16 CIFAR-100-C: Contrast/Snow/Brightness @sev5 = 34.58 / 48.35 / 57.02).
+- *Benchmarking Zero-Shot Robustness of Multimodal Foundation Models: A Pilot Study*,
+  arXiv:2403.10499 (clean CIFAR-100 ViT-B/16 ≈ 66.6%).

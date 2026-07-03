@@ -246,21 +246,6 @@ def get_clip_logits(images, clip_model, clip_weights):
         return image_features, clip_logits, loss, prob_map, pred, cls_token_list
 
 
-def wrap_effective_res(preprocess, n):
-    """Simulate evaluating CLIP at an effective input resolution of n px.
-
-    Inserts a Resize(n,n) BEFORE the standard CLIP preprocess (which then upsamples
-    back to 224). This passes the image through an n x n bottleneck — a no-model-surgery
-    proxy for low-resolution inference — used to test whether the paper's much lower
-    CIFAR-100-C CLIP numbers come from a degraded (low-res) input pipeline.
-
-    n <= 0 (or falsy) returns the preprocess unchanged (full 224 baseline).
-    """
-    if not n or n <= 0:
-        return preprocess
-    return transforms.Compose([transforms.Resize((n, n), interpolation=BICUBIC), preprocess])
-
-
 def get_config_file(config_path, dataset_name):
     if dataset_name == "I":
         config_name = "imagenet.yaml"
