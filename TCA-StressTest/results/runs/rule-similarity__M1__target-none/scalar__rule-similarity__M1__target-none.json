@@ -1,0 +1,12 @@
+{
+  "rule": "similarity",
+  "M": 1,
+  "mode": "clean",
+  "target_class": null,
+  "source_class": null,
+  "overall_acc": 56.46913580246913,
+  "avg_conf_gt": 0.4601776137543313,
+  "n_samples": 8100,
+  "seed": 1,
+  "token_pruning": "Ours-0.035"
+}

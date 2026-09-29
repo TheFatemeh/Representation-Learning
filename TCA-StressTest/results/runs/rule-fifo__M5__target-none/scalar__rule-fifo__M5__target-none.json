@@ -1,0 +1,12 @@
+{
+  "rule": "fifo",
+  "M": 5,
+  "mode": "clean",
+  "target_class": null,
+  "source_class": null,
+  "overall_acc": 59.25925925925926,
+  "avg_conf_gt": 0.5672787788767873,
+  "n_samples": 8100,
+  "seed": 1,
+  "token_pruning": "Ours-0.035"
+}

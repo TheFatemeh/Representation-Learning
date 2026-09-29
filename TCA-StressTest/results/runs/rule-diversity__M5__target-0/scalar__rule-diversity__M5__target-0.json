@@ -1,0 +1,16 @@
+{
+  "rule": "diversity",
+  "M": 5,
+  "mode": "seeded",
+  "target_class": 0,
+  "source_class": 6,
+  "overall_acc": 70.24691358024691,
+  "avg_conf_gt": 0.6487838068935606,
+  "target_class_acc": 46.0,
+  "target_class_conf": 0.3809711233774821,
+  "source_class_acc": 69.06666666666666,
+  "source_class_conf": 0.598961495478948,
+  "n_samples": 8100,
+  "seed": 1,
+  "token_pruning": "Ours-0.035"
+}

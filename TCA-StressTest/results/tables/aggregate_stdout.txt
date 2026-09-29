@@ -1,0 +1,208 @@
+Loading runs ...
+  found 16 clean runs, 120 poisoned runs
+  wrote results/tables/table1_poisons.csv
+
+### Table 1 -- identified poisons (most-confident misclassification per class)
+target_class           target_name  source_class(GT)           source_name  confidence  sample_id
+------------  --------------------  ----------------  --------------------  ----------  ---------
+           0            AnnualCrop                 6         PermanentCrop      0.7236        199
+           1                Forest                 2  HerbaceousVegetation      0.6191       7529
+           2  HerbaceousVegetation                 1                Forest      0.5586       3035
+           3               Highway                 8                 River      0.9868        586
+           4            Industrial                 8                 River      0.9351       3857
+           5               Pasture                 1                Forest      0.5249       3741
+           6         PermanentCrop                 5               Pasture      0.4019       8019
+           7           Residential                 3               Highway      0.8784       7491
+           8                 River                 2  HerbaceousVegetation      0.8135        296
+           9               SeaLake                 1                Forest      0.5557       7959
+  wrote results/tables/table2_poison_runs.csv
+
+### Table 2 -- per poisoned run (all metrics computable; confidence = prob. on GT class)
+rule  M  target_class           target_name  source_class           source_name  overall_acc  overall_conf_gt  target_acc  target_conf  source_acc  source_conf
+----  -  ------------  --------------------  ------------  --------------------  -----------  ---------------  ----------  -----------  ----------  -----------
+fifo  1             0            AnnualCrop             6         PermanentCrop        49.11           0.4710       61.33       0.5580       12.40       0.1629
+fifo  1             1                Forest             2  HerbaceousVegetation        49.11           0.4710       35.11       0.3274       23.78       0.2283
+fifo  1             2  HerbaceousVegetation             1                Forest        49.11           0.4710       23.78       0.2284       35.11       0.3274
+fifo  1             3               Highway             8                 River        49.11           0.4710       72.40       0.6901       38.67       0.3628
+fifo  1             4            Industrial             8                 River        49.11           0.4710       80.53       0.7891       38.67       0.3628
+fifo  1             5               Pasture             1                Forest        49.11           0.4710       57.00       0.5023       35.11       0.3274
+fifo  1             6         PermanentCrop             5               Pasture        49.11           0.4709       12.40       0.1639       57.00       0.5016
+fifo  1             7           Residential             3               Highway        49.11           0.4710       95.22       0.9205       72.40       0.6901
+fifo  1             8                 River             2  HerbaceousVegetation        49.11           0.4710       38.67       0.3629       23.78       0.2282
+fifo  1             9               SeaLake             1                Forest        49.11           0.4710       18.56       0.1991       35.11       0.3274
+fifo  3             0            AnnualCrop             6         PermanentCrop        56.10           0.5368       61.44       0.5522       25.73       0.2751
+fifo  3             1                Forest             2  HerbaceousVegetation        56.10           0.5368       57.00       0.5385       29.78       0.2749
+... (108 more rows in the CSV)
+  wrote results/tables/table3_clean_runs.csv
+
+### Table 3 -- clean runs: overall + per-class accuracy
+       rule  M  overall_acc  overall_conf_gt  acc_c0  acc_c1  acc_c2  acc_c3  acc_c4  acc_c5  acc_c6  acc_c7  acc_c8  acc_c9
+-----------  -  -----------  ---------------  ------  ------  ------  ------  ------  ------  ------  ------  ------  ------
+  diversity  1        67.65           0.4593   68.44   65.78   30.11   65.73   89.87   70.50   51.73   94.33   49.47   89.22
+  diversity  2        70.09           0.5532   48.11   79.56   38.67   65.73   80.93   75.83   62.27   95.56   59.73   94.44
+  diversity  3        68.51           0.5994   36.33   84.56   17.56   59.73   85.20   83.83   70.13   94.78   62.93   95.78
+  diversity  5        69.62           0.6451   39.22   86.67   25.00   54.53   88.53   83.00   70.93   94.78   62.93   94.78
+       fifo  1        49.11           0.4710   61.33   35.11   23.78   72.40   80.53   57.00   12.40   95.22   38.67   18.56
+       fifo  2        53.72           0.5157   60.78   50.22   30.44   70.27   73.47   53.00   21.20   96.11   52.80   29.11
+       fifo  3        56.10           0.5368   61.44   56.89   29.78   63.60   73.20   56.17   25.73   96.33   54.67   42.00
+       fifo  5        59.26           0.5673   59.78   67.00   28.56   46.67   74.40   62.83   33.47   97.11   61.20   59.22
+ similarity  1        56.47           0.4602   62.67   48.44   30.44   70.67   83.87   60.33   22.80   95.33   42.27   48.11
+ similarity  2        69.07           0.5497   48.89   82.11   38.11   61.47   77.60   73.50   53.33   96.22   62.67   94.78
+ similarity  3        70.90           0.6122   60.00   78.78   38.00   59.07   80.40   80.17   56.00   96.56   63.33   95.67
+ similarity  5        71.77           0.6663   62.11   80.00   25.22   57.33   88.93   82.33   68.53   95.44   66.67   93.67
+uncertainty  1        67.65           0.4593   68.44   65.78   30.11   65.73   89.87   70.50   51.73   94.33   49.47   89.22
+uncertainty  2        70.32           0.5537   49.33   79.11   39.44   61.47   82.40   77.50   62.93   95.67   61.33   94.22
+uncertainty  3        68.48           0.5984   36.56   84.44   17.33   58.53   85.33   83.83   70.93   94.78   63.07   95.78
+uncertainty  5        69.43           0.6431   38.56   86.67   24.00   54.13   88.40   83.17   70.53   95.11   63.33   94.78
+  wrote results/tables/table4_classnames.csv
+
+### Table 4 -- EuroSAT class index map
+index           folder_name                 prompt_name
+-----  --------------------  --------------------------
+    0            AnnualCrop            Annual Crop Land
+    1                Forest                      Forest
+    2  HerbaceousVegetation  Herbaceous Vegetation Land
+    3               Highway             Highway or Road
+    4            Industrial        Industrial Buildings
+    5               Pasture                Pasture Land
+    6         PermanentCrop         Permanent Crop Land
+    7           Residential       Residential Buildings
+    8                 River                       River
+    9               SeaLake                 Sea or Lake
+  wrote results/tables/table5_M1.csv
+
+### Table 5 -- main comparison, M=1  (diff = poisoned - clean; negative => poisoning hurt)
+                 target                    source            metric  fifo_poison  fifo_clean  fifo_diff  similarity_poison  similarity_clean  similarity_diff  diversity_poison  diversity_clean  diversity_diff  uncertainty_poison  uncertainty_clean  uncertainty_diff
+-----------------------  ------------------------  ----------------  -----------  ----------  ---------  -----------------  ----------------  ---------------  ----------------  ---------------  --------------  ------------------  -----------------  ----------------
+          c0 AnnualCrop         c'6 PermanentCrop       overall_acc        49.11       49.11       0.00              56.47             56.47             0.00             67.65            67.65            0.00               67.65              67.65              0.00
+          c0 AnnualCrop         c'6 PermanentCrop   overall_conf_gt       0.4710      0.4710    -0.0000             0.4601            0.4602          -0.0000            0.4593           0.4593         -0.0000              0.4593             0.4593           -0.0000
+          c0 AnnualCrop         c'6 PermanentCrop  target_class_acc        61.33       61.33       0.00              62.67             62.67             0.00             68.44            68.44            0.00               68.44              68.44              0.00
+          c0 AnnualCrop         c'6 PermanentCrop  source_class_acc        12.40       12.40       0.00              22.80             22.80             0.00             51.73            51.73            0.00               51.73              51.73              0.00
+              c1 Forest  c'2 HerbaceousVegetation       overall_acc        49.11       49.11       0.00              56.59             56.47             0.12             63.53            67.65           -4.12               63.53              67.65             -4.12
+              c1 Forest  c'2 HerbaceousVegetation   overall_conf_gt       0.4710      0.4710     0.0000             0.4607            0.4602           0.0006            0.4401           0.4593         -0.0192              0.4401             0.4593           -0.0192
+              c1 Forest  c'2 HerbaceousVegetation  target_class_acc        35.11       35.11       0.00              49.78             48.44             1.33             16.44            65.78          -49.33               16.44              65.78            -49.33
+              c1 Forest  c'2 HerbaceousVegetation  source_class_acc        23.78       23.78       0.00              30.22             30.44            -0.22             41.22            30.11           11.11               41.22              30.11             11.11
+c2 HerbaceousVegetation                c'1 Forest       overall_acc        49.11       49.11       0.00              56.44             56.47            -0.02             68.19            67.65            0.53               68.19              67.65              0.53
+c2 HerbaceousVegetation                c'1 Forest   overall_conf_gt       0.4710      0.4710     0.0000             0.4602            0.4602          -0.0000            0.4606           0.4593          0.0013              0.4606             0.4593            0.0013
+c2 HerbaceousVegetation                c'1 Forest  target_class_acc        23.78       23.78       0.00              30.22             30.44            -0.22             28.33            30.11           -1.78               28.33              30.11             -1.78
+c2 HerbaceousVegetation                c'1 Forest  source_class_acc        35.11       35.11       0.00              48.44             48.44             0.00             67.00            65.78            1.22               67.00              65.78              1.22
+             c3 Highway                 c'8 River       overall_acc        49.11       49.11       0.00              56.47             56.47             0.00             67.64            67.65           -0.01               67.64              67.65             -0.01
+             c3 Highway                 c'8 River   overall_conf_gt       0.4710      0.4710    -0.0000             0.4602            0.4602          -0.0000            0.4593           0.4593          0.0000              0.4593             0.4593            0.0000
+             c3 Highway                 c'8 River  target_class_acc        72.40       72.40       0.00              70.67             70.67             0.00             65.60            65.73           -0.13               65.60              65.73             -0.13
+             c3 Highway                 c'8 River  source_class_acc        38.67       38.67       0.00              42.27             42.27             0.00             49.47            49.47            0.00               49.47              49.47              0.00
+          c4 Industrial                 c'8 River       overall_acc        49.11       49.11       0.00              56.47             56.47             0.00             67.65            67.65            0.00               67.65              67.65              0.00
+          c4 Industrial                 c'8 River   overall_conf_gt       0.4710      0.4710    -0.0000             0.4602            0.4602          -0.0000            0.4593           0.4593         -0.0000              0.4593             0.4593           -0.0000
+          c4 Industrial                 c'8 River  target_class_acc        80.53       80.53       0.00              83.87             83.87             0.00             89.87            89.87            0.00               89.87              89.87              0.00
+          c4 Industrial                 c'8 River  source_class_acc        38.67       38.67       0.00              42.27             42.27             0.00             49.47            49.47            0.00               49.47              49.47              0.00
+             c5 Pasture                c'1 Forest       overall_acc        49.11       49.11       0.00              56.47             56.47             0.00             67.65            67.65            0.00               67.65              67.65              0.00
+             c5 Pasture                c'1 Forest   overall_conf_gt       0.4710      0.4710    -0.0000             0.4602            0.4602           0.0000            0.4593           0.4593          0.0000              0.4593             0.4593            0.0000
+             c5 Pasture                c'1 Forest  target_class_acc        57.00       57.00       0.00              60.33             60.33             0.00             70.50            70.50            0.00               70.50              70.50              0.00
+             c5 Pasture                c'1 Forest  source_class_acc        35.11       35.11       0.00              48.44             48.44             0.00             65.78            65.78            0.00               65.78              65.78              0.00
+       c6 PermanentCrop               c'5 Pasture       overall_acc        49.11       49.11       0.00              56.27             56.47            -0.20             66.41            67.65           -1.25               66.41              67.65             -1.25
+       c6 PermanentCrop               c'5 Pasture   overall_conf_gt       0.4709      0.4710    -0.0001             0.4593            0.4602          -0.0009            0.4544           0.4593         -0.0049              0.4544             0.4593           -0.0049
+       c6 PermanentCrop               c'5 Pasture  target_class_acc        12.40       12.40       0.00              20.80             22.80            -2.00             38.67            51.73          -13.07               38.67              51.73            -13.07
+       c6 PermanentCrop               c'5 Pasture  source_class_acc        57.00       57.00       0.00              60.17             60.33            -0.17             68.83            70.50           -1.67               68.83              70.50             -1.67
+         c7 Residential               c'3 Highway       overall_acc        49.11       49.11       0.00              56.47             56.47             0.00             67.65            67.65            0.00               67.65              67.65              0.00
+         c7 Residential               c'3 Highway   overall_conf_gt       0.4710      0.4710    -0.0000             0.4602            0.4602          -0.0000            0.4593           0.4593         -0.0000              0.4593             0.4593           -0.0000
+         c7 Residential               c'3 Highway  target_class_acc        95.22       95.22       0.00              95.33             95.33             0.00             94.33            94.33            0.00               94.33              94.33              0.00
+         c7 Residential               c'3 Highway  source_class_acc        72.40       72.40       0.00              70.67             70.67             0.00             65.73            65.73            0.00               65.73              65.73              0.00
+               c8 River  c'2 HerbaceousVegetation       overall_acc        49.11       49.11       0.00              56.46             56.47            -0.01             67.63            67.65           -0.02               67.63              67.65             -0.02
+               c8 River  c'2 HerbaceousVegetation   overall_conf_gt       0.4710      0.4710     0.0000             0.4601            0.4602          -0.0001            0.4592           0.4593         -0.0001              0.4592             0.4593           -0.0001
+               c8 River  c'2 HerbaceousVegetation  target_class_acc        38.67       38.67       0.00              42.13             42.27            -0.13             49.20            49.47           -0.27               49.20              49.47             -0.27
+               c8 River  c'2 HerbaceousVegetation  source_class_acc        23.78       23.78       0.00              30.44             30.44             0.00             30.11            30.11            0.00               30.11              30.11              0.00
+             c9 SeaLake                c'1 Forest       overall_acc        49.11       49.11       0.00              56.47             56.47             0.00             67.69            67.65            0.04               67.69              67.65              0.04
+             c9 SeaLake                c'1 Forest   overall_conf_gt       0.4710      0.4710     0.0000             0.4601            0.4602          -0.0001            0.4593           0.4593         -0.0000              0.4593             0.4593           -0.0000
+             c9 SeaLake                c'1 Forest  target_class_acc        18.56       18.56       0.00              48.11             48.11             0.00             89.56            89.22            0.33               89.56              89.22              0.33
+             c9 SeaLake                c'1 Forest  source_class_acc        35.11       35.11       0.00              48.44             48.44             0.00             65.78            65.78            0.00               65.78              65.78              0.00
+  wrote results/tables/table5_M3.csv
+
+### Table 5 -- main comparison, M=3  (diff = poisoned - clean; negative => poisoning hurt)
+                 target                    source            metric  fifo_poison  fifo_clean  fifo_diff  similarity_poison  similarity_clean  similarity_diff  diversity_poison  diversity_clean  diversity_diff  uncertainty_poison  uncertainty_clean  uncertainty_diff
+-----------------------  ------------------------  ----------------  -----------  ----------  ---------  -----------------  ----------------  ---------------  ----------------  ---------------  --------------  ------------------  -----------------  ----------------
+          c0 AnnualCrop         c'6 PermanentCrop       overall_acc        56.10       56.10       0.00              70.59             70.90            -0.31             68.84            68.51            0.33               68.44              68.48             -0.04
+          c0 AnnualCrop         c'6 PermanentCrop   overall_conf_gt       0.5368      0.5368    -0.0000             0.6073            0.6122          -0.0049            0.6014           0.5994          0.0020              0.5989             0.5984            0.0005
+          c0 AnnualCrop         c'6 PermanentCrop  target_class_acc        61.44       61.44       0.00              54.11             60.00            -5.89             38.78            36.33            2.44               36.89              36.56              0.33
+          c0 AnnualCrop         c'6 PermanentCrop  source_class_acc        25.73       25.73       0.00              61.60             56.00             5.60             70.93            70.13            0.80               71.33              70.93              0.40
+              c1 Forest  c'2 HerbaceousVegetation       overall_acc        56.10       56.10       0.00              62.64             70.90            -8.26             67.70            68.51           -0.80               67.22              68.48             -1.26
+              c1 Forest  c'2 HerbaceousVegetation   overall_conf_gt       0.5368      0.5368    -0.0000             0.5491            0.6122          -0.0631            0.5849           0.5994         -0.0145              0.5826             0.5984           -0.0158
+              c1 Forest  c'2 HerbaceousVegetation  target_class_acc        57.00       56.89       0.11               2.44             78.78           -76.33             63.67            84.56          -20.89               63.22              84.44            -21.22
+              c1 Forest  c'2 HerbaceousVegetation  source_class_acc        29.78       29.78       0.00              41.33             38.00             3.33             30.11            17.56           12.56               29.11              17.33             11.78
+c2 HerbaceousVegetation                c'1 Forest       overall_acc        56.10       56.10       0.00              69.27             70.90            -1.63             68.54            68.51            0.04               68.49              68.48              0.01
+c2 HerbaceousVegetation                c'1 Forest   overall_conf_gt       0.5368      0.5368     0.0000             0.6075            0.6122          -0.0048            0.5989           0.5994         -0.0005              0.5980             0.5984           -0.0004
+c2 HerbaceousVegetation                c'1 Forest  target_class_acc        29.78       29.78       0.00              24.44             38.00           -13.56             16.78            17.56           -0.78               16.44              17.33             -0.89
+c2 HerbaceousVegetation                c'1 Forest  source_class_acc        56.89       56.89       0.00              82.33             78.78             3.56             84.67            84.56            0.11               84.67              84.44              0.22
+             c3 Highway                 c'8 River       overall_acc        56.09       56.10      -0.01              69.69             70.90            -1.21             68.51            68.51            0.00               68.48              68.48              0.00
+             c3 Highway                 c'8 River   overall_conf_gt       0.5367      0.5368    -0.0001             0.5977            0.6122          -0.0145            0.5992           0.5994         -0.0002              0.5982             0.5984           -0.0002
+             c3 Highway                 c'8 River  target_class_acc        63.60       63.60       0.00              54.93             59.07            -4.13             59.73            59.73            0.00               58.53              58.53              0.00
+             c3 Highway                 c'8 River  source_class_acc        54.67       54.67       0.00              63.60             63.33             0.27             62.93            62.93            0.00               63.07              63.07              0.00
+          c4 Industrial                 c'8 River       overall_acc        56.11       56.10       0.01              70.91             70.90             0.01             68.52            68.51            0.01               68.49              68.48              0.01
+          c4 Industrial                 c'8 River   overall_conf_gt       0.5369      0.5368     0.0001             0.6123            0.6122           0.0001            0.5995           0.5994          0.0001              0.5985             0.5984            0.0001
+          c4 Industrial                 c'8 River  target_class_acc        73.33       73.20       0.13              80.53             80.40             0.13             85.33            85.20            0.13               85.47              85.33              0.13
+          c4 Industrial                 c'8 River  source_class_acc        54.67       54.67       0.00              63.33             63.33             0.00             62.93            62.93            0.00               63.07              63.07              0.00
+             c5 Pasture                c'1 Forest       overall_acc        56.10       56.10       0.00              70.90             70.90             0.00             68.51            68.51            0.00               68.41              68.48             -0.07
+             c5 Pasture                c'1 Forest   overall_conf_gt       0.5367      0.5368    -0.0001             0.6121            0.6122          -0.0002            0.6002           0.5994          0.0008              0.5975             0.5984           -0.0009
+             c5 Pasture                c'1 Forest  target_class_acc        56.17       56.17       0.00              80.17             80.17             0.00             83.17            83.83           -0.67               83.33              83.83             -0.50
+             c5 Pasture                c'1 Forest  source_class_acc        56.89       56.89       0.00              78.78             78.78             0.00             84.22            84.56           -0.33               84.78              84.44              0.33
+       c6 PermanentCrop               c'5 Pasture       overall_acc        56.16       56.10       0.06              69.40             70.90            -1.51             68.54            68.51            0.04               68.36              68.48             -0.12
+       c6 PermanentCrop               c'5 Pasture   overall_conf_gt       0.5373      0.5368     0.0005             0.6009            0.6122          -0.0114            0.5912           0.5994         -0.0082              0.5934             0.5984           -0.0051
+       c6 PermanentCrop               c'5 Pasture  target_class_acc        26.00       25.73       0.27              56.40             56.00             0.40             53.20            70.13          -16.93               57.87              70.93            -13.07
+       c6 PermanentCrop               c'5 Pasture  source_class_acc        56.00       56.17      -0.17              80.33             80.17             0.17             83.00            83.83           -0.83               83.17              83.83             -0.67
+         c7 Residential               c'3 Highway       overall_acc        56.10       56.10       0.00              70.86             70.90            -0.04             68.52            68.51            0.01               68.49              68.48              0.01
+         c7 Residential               c'3 Highway   overall_conf_gt       0.5368      0.5368    -0.0000             0.6117            0.6122          -0.0005            0.5992           0.5994         -0.0002              0.5982             0.5984           -0.0002
+         c7 Residential               c'3 Highway  target_class_acc        96.33       96.33       0.00              96.33             96.56            -0.22             94.78            94.78            0.00               94.78              94.78              0.00
+         c7 Residential               c'3 Highway  source_class_acc        63.60       63.60       0.00              59.07             59.07             0.00             59.73            59.73            0.00               58.53              58.53              0.00
+               c8 River  c'2 HerbaceousVegetation       overall_acc        56.11       56.10       0.01              70.07             70.90            -0.83             68.68            68.51            0.17               68.52              68.48              0.04
+               c8 River  c'2 HerbaceousVegetation   overall_conf_gt       0.5369      0.5368     0.0001             0.6050            0.6122          -0.0072            0.6008           0.5994          0.0014              0.5980             0.5984           -0.0005
+               c8 River  c'2 HerbaceousVegetation  target_class_acc        54.80       54.67       0.13              51.87             63.33           -11.47             62.80            62.93           -0.13               63.07              63.07              0.00
+               c8 River  c'2 HerbaceousVegetation  source_class_acc        29.78       29.78       0.00              33.78             38.00            -4.22             17.56            17.56            0.00               17.11              17.33             -0.22
+             c9 SeaLake                c'1 Forest       overall_acc        56.11       56.10       0.01              70.83             70.90            -0.07             68.58            68.51            0.07               68.54              68.48              0.06
+             c9 SeaLake                c'1 Forest   overall_conf_gt       0.5369      0.5368     0.0001             0.6124            0.6122           0.0001            0.5990           0.5994         -0.0004              0.5980             0.5984           -0.0004
+             c9 SeaLake                c'1 Forest  target_class_acc        42.11       42.00       0.11              96.00             95.67             0.33             96.22            95.78            0.44               96.22              95.78              0.44
+             c9 SeaLake                c'1 Forest  source_class_acc        56.89       56.89       0.00              77.22             78.78            -1.56             84.67            84.56            0.11               84.56              84.44              0.11
+  wrote results/tables/table5_M5.csv
+
+### Table 5 -- main comparison, M=5  (diff = poisoned - clean; negative => poisoning hurt)
+                 target                    source            metric  fifo_poison  fifo_clean  fifo_diff  similarity_poison  similarity_clean  similarity_diff  diversity_poison  diversity_clean  diversity_diff  uncertainty_poison  uncertainty_clean  uncertainty_diff
+-----------------------  ------------------------  ----------------  -----------  ----------  ---------  -----------------  ----------------  ---------------  ----------------  ---------------  --------------  ------------------  -----------------  ----------------
+          c0 AnnualCrop         c'6 PermanentCrop       overall_acc        59.27       59.26       0.01              72.07             71.77             0.31             70.25            69.62            0.63               69.36              69.43             -0.07
+          c0 AnnualCrop         c'6 PermanentCrop   overall_conf_gt       0.5674      0.5673     0.0001             0.6687            0.6663           0.0025            0.6488           0.6451          0.0037              0.6428             0.6431           -0.0003
+          c0 AnnualCrop         c'6 PermanentCrop  target_class_acc        59.89       59.78       0.11              60.11             62.11            -2.00             46.00            39.22            6.78               38.22              38.56             -0.33
+          c0 AnnualCrop         c'6 PermanentCrop  source_class_acc        33.47       33.47       0.00              70.27             68.53             1.73             69.07            70.93           -1.87               70.13              70.53             -0.40
+              c1 Forest  c'2 HerbaceousVegetation       overall_acc        59.26       59.26       0.00              65.01             71.77            -6.75             68.84            69.62           -0.78               69.15              69.43             -0.28
+              c1 Forest  c'2 HerbaceousVegetation   overall_conf_gt       0.5673      0.5673    -0.0000             0.6020            0.6663          -0.0643            0.6365           0.6451         -0.0086              0.6388             0.6431           -0.0044
+              c1 Forest  c'2 HerbaceousVegetation  target_class_acc        67.11       67.00       0.11              32.56             80.00           -47.44             73.00            86.67          -13.67               73.00              86.67            -13.67
+              c1 Forest  c'2 HerbaceousVegetation  source_class_acc        28.56       28.56       0.00              31.33             25.22             6.11             29.33            25.00            4.33               29.00              24.00              5.00
+c2 HerbaceousVegetation                c'1 Forest       overall_acc        59.27       59.26       0.01              71.25             71.77            -0.52             68.72            69.62           -0.90               69.43              69.43              0.00
+c2 HerbaceousVegetation                c'1 Forest   overall_conf_gt       0.5674      0.5673     0.0001             0.6622            0.6663          -0.0041            0.6369           0.6451         -0.0082              0.6430             0.6431           -0.0002
+c2 HerbaceousVegetation                c'1 Forest  target_class_acc        28.67       28.56       0.11              22.78             25.22            -2.44             18.00            25.00           -7.00               18.00              24.00             -6.00
+c2 HerbaceousVegetation                c'1 Forest  source_class_acc        67.00       67.00       0.00              80.78             80.00             0.78             87.00            86.67            0.33               87.11              86.67              0.44
+             c3 Highway                 c'8 River       overall_acc        59.25       59.26      -0.01              71.72             71.77            -0.05             69.70            69.62            0.09               69.83              69.43              0.40
+             c3 Highway                 c'8 River   overall_conf_gt       0.5672      0.5673    -0.0001             0.6653            0.6663          -0.0010            0.6453           0.6451          0.0002              0.6457             0.6431            0.0026
+             c3 Highway                 c'8 River  target_class_acc        46.67       46.67       0.00              56.53             57.33            -0.80             53.60            54.53           -0.93               54.27              54.13              0.13
+             c3 Highway                 c'8 River  source_class_acc        61.20       61.20       0.00              65.73             66.67            -0.93             63.07            62.93            0.13               63.20              63.33             -0.13
+          c4 Industrial                 c'8 River       overall_acc        59.27       59.26       0.01              71.75             71.77            -0.01             69.63            69.62            0.01               69.44              69.43              0.01
+          c4 Industrial                 c'8 River   overall_conf_gt       0.5674      0.5673     0.0001             0.6663            0.6663           0.0001            0.6452           0.6451          0.0001              0.6432             0.6431            0.0001
+          c4 Industrial                 c'8 River  target_class_acc        74.53       74.40       0.13              88.80             88.93            -0.13             88.53            88.53            0.00               88.40              88.40              0.00
+          c4 Industrial                 c'8 River  source_class_acc        61.20       61.20       0.00              66.67             66.67             0.00             62.93            62.93            0.00               63.33              63.33              0.00
+             c5 Pasture                c'1 Forest       overall_acc        59.26       59.26       0.00              71.78             71.77             0.01             69.14            69.62           -0.48               70.02              69.43              0.59
+             c5 Pasture                c'1 Forest   overall_conf_gt       0.5672      0.5673    -0.0001             0.6661            0.6663          -0.0002            0.6413           0.6451         -0.0038              0.6468             0.6431            0.0037
+             c5 Pasture                c'1 Forest  target_class_acc        62.83       62.83       0.00              82.50             82.33             0.17             80.83            83.00           -2.17               83.67              83.17              0.50
+             c5 Pasture                c'1 Forest  source_class_acc        67.00       67.00       0.00              79.89             80.00            -0.11             87.11            86.67            0.44               87.00              86.67              0.33
+       c6 PermanentCrop               c'5 Pasture       overall_acc        59.27       59.26       0.01              70.59             71.77            -1.17             69.89            69.62            0.27               69.78              69.43              0.35
+       c6 PermanentCrop               c'5 Pasture   overall_conf_gt       0.5675      0.5673     0.0002             0.6542            0.6663          -0.0120            0.6411           0.6451         -0.0040              0.6408             0.6431           -0.0024
+       c6 PermanentCrop               c'5 Pasture  target_class_acc        33.87       33.47       0.40              63.47             68.53            -5.07             62.80            70.93           -8.13               58.27              70.53            -12.27
+       c6 PermanentCrop               c'5 Pasture  source_class_acc        62.50       62.83      -0.33              84.17             82.33             1.83             83.17            83.00            0.17               83.50              83.17              0.33
+         c7 Residential               c'3 Highway       overall_acc        59.26       59.26       0.00              71.74             71.77            -0.02             69.63            69.62            0.01               69.44              69.43              0.01
+         c7 Residential               c'3 Highway   overall_conf_gt       0.5673      0.5673     0.0000             0.6662            0.6663          -0.0001            0.6451           0.6451         -0.0000              0.6431             0.6431           -0.0000
+         c7 Residential               c'3 Highway  target_class_acc        97.11       97.11       0.00              95.33             95.44            -0.11             94.78            94.78            0.00               95.11              95.11              0.00
+         c7 Residential               c'3 Highway  source_class_acc        46.67       46.67       0.00              57.33             57.33             0.00             54.53            54.53            0.00               54.13              54.13              0.00
+               c8 River  c'2 HerbaceousVegetation       overall_acc        59.28       59.26       0.02              71.62             71.77            -0.15             69.64            69.62            0.02               69.67              69.43              0.23
+               c8 River  c'2 HerbaceousVegetation   overall_conf_gt       0.5675      0.5673     0.0002             0.6636            0.6663          -0.0027            0.6442           0.6451         -0.0009              0.6449             0.6431            0.0018
+               c8 River  c'2 HerbaceousVegetation  target_class_acc        61.47       61.20       0.27              59.60             66.67            -7.07             62.93            62.93            0.00               63.20              63.33             -0.13
+               c8 River  c'2 HerbaceousVegetation  source_class_acc        28.56       28.56       0.00              24.78             25.22            -0.44             23.22            25.00           -1.78               23.11              24.00             -0.89
+             c9 SeaLake                c'1 Forest       overall_acc        59.28       59.26       0.02              71.89             71.77             0.12             69.19            69.62           -0.43               69.41              69.43             -0.02
+             c9 SeaLake                c'1 Forest   overall_conf_gt       0.5676      0.5673     0.0003             0.6672            0.6663           0.0009            0.6412           0.6451         -0.0039              0.6426             0.6431           -0.0005
+             c9 SeaLake                c'1 Forest  target_class_acc        59.44       59.22       0.22              94.78             93.67             1.11             95.67            94.78            0.89               95.56              94.78              0.78
+             c9 SeaLake                c'1 Forest  source_class_acc        67.00       67.00       0.00              80.00             80.00             0.00             86.78            86.67            0.11               86.89              86.67              0.22
+
+All tables written to results/tables/

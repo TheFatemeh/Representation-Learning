@@ -1,0 +1,16 @@
+{
+  "rule": "uncertainty",
+  "M": 3,
+  "mode": "seeded",
+  "target_class": 3,
+  "source_class": 8,
+  "overall_acc": 68.48148148148148,
+  "avg_conf_gt": 0.5981803029481275,
+  "target_class_acc": 58.53333333333333,
+  "target_class_conf": 0.521626205364863,
+  "source_class_acc": 63.06666666666667,
+  "source_class_conf": 0.5304916294415792,
+  "n_samples": 8100,
+  "seed": 1,
+  "token_pruning": "Ours-0.035"
+}

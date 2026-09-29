@@ -1,0 +1,12 @@
+{
+  "rule": "diversity",
+  "M": 2,
+  "mode": "empty",
+  "target_class": null,
+  "source_class": null,
+  "overall_acc": 49.111111111111114,
+  "avg_conf_gt": 0.350727118562769,
+  "n_samples": 8100,
+  "seed": 1,
+  "token_pruning": "Ours-0.035"
+}

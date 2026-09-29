@@ -44,8 +44,16 @@ TCA-StressTest/
 ├── IMPLEMENTATION_NOTES.md         # NEW. Plain-language log of every change, in order.
 ├── StressTest.md                   # NEW. This file.
 │
-└── aggregate.py                    # NOT YET CREATED (Stage 4): rolls results/ into the tidy
-                                    #   scalar/disaggregated tables + the per-rule contamination plot.
+└── aggregate.py                    # NEW (Stage 4). Reads results/runs/ + results/identify/ and
+                                    #   writes the 5 final tables to results/tables/:
+                                    #     table1_poisons.csv        the 10 poisons (target, GT, conf)
+                                    #     table2_poison_runs.csv    per poisoned run: overall/target/
+                                    #                               source accuracy + confidence
+                                    #     table3_clean_runs.csv     per clean run: overall + per-class acc
+                                    #     table4_classnames.csv     class index <-> name map
+                                    #     table5_M{1,3,5}.csv       main poisoned-vs-clean-vs-diff table,
+                                    #                               per rule, matched per target/source class
+                                    #   Run:  python3 aggregate.py   (CPU only, no GPU needed)
 ```
 
 ## How to run (in order)
@@ -56,8 +64,8 @@ sbatch scripts/sweep_poison_M1.sbatch   # 40 runs, M=1
 sbatch scripts/sweep_poison_M3.sbatch   # 40 runs, M=3
 sbatch scripts/sweep_poison_M5.sbatch   # 40 runs, M=5
 # then, once all finish:
-# python3 aggregate.py                  # (Stage 4, to be added)
+python3 aggregate.py                    # Stage 4: writes the 5 tables to results/tables/
 ```
 
-Stages 1 (instrument), 2 (identify), and the clean baselines are already done.
+All stages are done: instrument (1), identify (2), clean + poisoned sweeps (3), tables (4).
 ```

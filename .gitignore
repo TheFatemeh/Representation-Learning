@@ -16,8 +16,3 @@ output-t2/
 /TCA-StressTest/IMPLEMENTATION_NOTES.md
 /TCA-StressTest/make_latex_tables.py
 
-# results-inferred: keep only the csv tables and png figures
-/TCA-StressTest/results-inferred/**
-!/TCA-StressTest/results-inferred/**/
-!/TCA-StressTest/results-inferred/**/*.csv
-!/TCA-StressTest/results-inferred/**/*.png

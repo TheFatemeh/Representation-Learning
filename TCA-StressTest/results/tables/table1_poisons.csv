@@ -1,0 +1,11 @@
+target_class,target_name,source_class(GT),source_name,confidence,sample_id
+0,AnnualCrop,6,PermanentCrop,0.7236,199
+1,Forest,2,HerbaceousVegetation,0.6191,7529
+2,HerbaceousVegetation,1,Forest,0.5586,3035
+3,Highway,8,River,0.9868,586
+4,Industrial,8,River,0.9351,3857
+5,Pasture,1,Forest,0.5249,3741
+6,PermanentCrop,5,Pasture,0.4019,8019
+7,Residential,3,Highway,0.8784,7491
+8,River,2,HerbaceousVegetation,0.8135,296
+9,SeaLake,1,Forest,0.5557,7959

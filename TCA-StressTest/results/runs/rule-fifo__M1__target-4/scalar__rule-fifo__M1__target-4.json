@@ -1,0 +1,16 @@
+{
+  "rule": "fifo",
+  "M": 1,
+  "mode": "seeded",
+  "target_class": 4,
+  "source_class": 8,
+  "overall_acc": 49.111111111111114,
+  "avg_conf_gt": 0.4709835685256087,
+  "target_class_acc": 80.53333333333333,
+  "target_class_conf": 0.7891315104166666,
+  "source_class_acc": 38.666666666666664,
+  "source_class_conf": 0.362807977437973,
+  "n_samples": 8100,
+  "seed": 1,
+  "token_pruning": "Ours-0.035"
+}

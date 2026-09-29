@@ -1,0 +1,12 @@
+{
+  "rule": "uncertainty",
+  "M": 5,
+  "mode": "clean",
+  "target_class": null,
+  "source_class": null,
+  "overall_acc": 69.4320987654321,
+  "avg_conf_gt": 0.6431323703498016,
+  "n_samples": 8100,
+  "seed": 1,
+  "token_pruning": "Ours-0.035"
+}

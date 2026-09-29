@@ -1,0 +1,16 @@
+{
+  "rule": "similarity",
+  "M": 3,
+  "mode": "seeded",
+  "target_class": 1,
+  "source_class": 2,
+  "overall_acc": 62.641975308641975,
+  "avg_conf_gt": 0.5491493312959318,
+  "target_class_acc": 2.4444444444444446,
+  "target_class_conf": 0.06876725176970164,
+  "source_class_acc": 41.333333333333336,
+  "source_class_conf": 0.3243786042928696,
+  "n_samples": 8100,
+  "seed": 1,
+  "token_pruning": "Ours-0.035"
+}
