@@ -1,0 +1,20 @@
+run,target class,lost samples went to,count
+rule-similarity__M3__target-1,1 Forest,2 HerbaceousVegetation,331
+rule-similarity__M3__target-1,1 Forest,9 SeaLake,220
+rule-similarity__M3__target-1,1 Forest,5 Pasture,114
+rule-similarity__M3__target-1,1 Forest,8 River,21
+rule-similarity__M3__target-1,1 Forest,3 Highway,2
+rule-uncertainty__M1__target-1,1 Forest,2 HerbaceousVegetation,264
+rule-uncertainty__M1__target-1,1 Forest,9 SeaLake,82
+rule-uncertainty__M1__target-1,1 Forest,5 Pasture,45
+rule-uncertainty__M1__target-1,1 Forest,3 Highway,34
+rule-uncertainty__M1__target-1,1 Forest,8 River,10
+rule-uncertainty__M1__target-1,1 Forest,0 AnnualCrop,6
+rule-uncertainty__M1__target-1,1 Forest,6 PermanentCrop,4
+rule-diversity__M1__target-1,1 Forest,2 HerbaceousVegetation,264
+rule-diversity__M1__target-1,1 Forest,9 SeaLake,82
+rule-diversity__M1__target-1,1 Forest,5 Pasture,45
+rule-diversity__M1__target-1,1 Forest,3 Highway,34
+rule-diversity__M1__target-1,1 Forest,8 River,10
+rule-diversity__M1__target-1,1 Forest,0 AnnualCrop,6
+rule-diversity__M1__target-1,1 Forest,6 PermanentCrop,4

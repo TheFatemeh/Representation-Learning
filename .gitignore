@@ -1,10 +1,23 @@
 __pycache__/
 *.pyc
 tmp_out
-results/
-TCA/data/
-results-t2/
-output-t2/
-/TCA-StressTest/data/
-/TCA-StressTest/data/**
+tmp.sh
 
+# datasets (large, re-downloadable via the scripts)
+TCA/data/
+/TCA-StressTest/data/
+
+# raw SLURM logs
+output-t2/
+/TCA-StressTest/logs/
+
+# report drafting and LaTeX helpers
+/REPORT_PLAN.md
+/TCA-StressTest/IMPLEMENTATION_NOTES.md
+/TCA-StressTest/make_latex_tables.py
+
+# results-inferred: keep only the csv tables and png figures
+/TCA-StressTest/results-inferred/**
+!/TCA-StressTest/results-inferred/**/
+!/TCA-StressTest/results-inferred/**/*.csv
+!/TCA-StressTest/results-inferred/**/*.png
